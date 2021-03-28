@@ -17,6 +17,10 @@
     add(value: number) {
         this.amount += value;
     }
+
+    withdraw(value: number) {
+        this.amount -= value;
+    }
 }
 
 
