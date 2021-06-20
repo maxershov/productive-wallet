@@ -1,9 +1,6 @@
-const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CompressionPlugin = require('compression-webpack-plugin');
 const { VueLoaderPlugin } = require("vue-loader");
 
 const ts = {
@@ -11,7 +8,6 @@ const ts = {
   loader: require.resolve("babel-loader"),
   exclude: [/node_modules/]
 };
-
 
 const vue = {
   test: /\.vue?$/,
@@ -34,7 +30,7 @@ const css = {
 };
 
 const imgs = {
-  test: /\.(jpe?g|png|gif|svg)$/i,
+  test: /\.(jpeg|jpg|png|gif|webp|svg)$/i,
   use: [{
     loader: 'file-loader',
     options: {
@@ -50,63 +46,50 @@ const etc = {
   exclude: [/\.(js|mjs|jsx|ts|tsx|svg|html|json|svg|vue)$/, /\.(sc|c)ss$/],
   options: {
     name: "static/media/[name].[hash:8].[ext]",
-    esModule: false // fix problem with img [object Module]
+    esModule: false // fix problem with img [object Module] in browser
   }
 };
 
+
 module.exports = {
   context: path.resolve(__dirname),
+  mode: "development",
   entry: ["@babel/polyfill", "./src/index.js"],
-  mode: "production",
+  devtool: "source-map",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: '[name].[contenthash].bundle.js',
+    filename: "main.js",
+    chunkFilename: "[name].bundle.js",
     publicPath: "/"
   },
+  devServer: {
+    port: 6802,
+    open: true,
+    hot: true,
+    watchContentBase: true,
+    progress: true,
+    contentBase: path.join(__dirname, "dist"),
+    writeToDisk: true,
+    overlay: true,
+    historyApiFallback: true // on 404 load publicPath => for BrowserRouter on refresh
+  },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.vue'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.vue'],
     modules: ["node_modules"],
     "alias": {
       vue$: "vue/dist/vue.runtime.esm.js",
-      "SRC": path.resolve(__dirname, "/src")
+      "@src": path.resolve(__dirname, "/src")
     },
   },
   module: {
-    rules: [ts, js, vue, scss, imgs, etc]
+    rules: [ts, js, vue, css, imgs, etc]
   },
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
       title: "ChangeME",
-      favicon: path.join(__dirname, "src", "assets", "favicon.ico"),
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        keepClosingSlash: true,
-        minifyURLs: true
-      }
     }),
-    new CompressionPlugin({
-      algorithm: "gzip"
-    }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          unsafe: true,
-          inline: true,
-          passes: 2,
-          keep_fargs: false
-        },
-        output: {
-          beautify: false,
-        },
-      },
-      parallel: true
-    }),
-    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })
+    new MiniCssExtractPlugin()
   ]
 };
