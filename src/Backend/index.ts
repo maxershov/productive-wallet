@@ -2,18 +2,18 @@ import { Task } from '../../types';
 
 export function getTasks(): Task[] {
     return [{
-        Date: '2021-06-19T21:00:00.000Z',
+        date: '2021-06-19T21:00:00.000Z',
         ID: 1,
-        Type: 'TASK',
-        User: 'Max',
-        Text: 'First Task'
+        type: 'TASK',
+        user: 'Max',
+        title: 'First Task'
     },
     {
-        Date: '2021-06-19T22:00:00.000Z',
+        date: '2021-06-19T22:00:00.000Z',
         ID: 2,
-        Type: 'TASK',
-        User: 'John',
-        Text: 'Second Task'
+        type: 'TASK',
+        user: 'John',
+        title: 'Second Task'
     }
     ]
 }

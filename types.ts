@@ -1,7 +1,7 @@
 export type Task = {
-    Date: string;
+    date: string;
     ID: number;
-    Type: string;
-    User: string;
-    Text: string;
+    type: string;
+    user: string;
+    title: string;
 }
