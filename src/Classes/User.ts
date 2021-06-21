@@ -1,5 +1,6 @@
 import { Balance } from './Balance';
-import { Task } from './Task';
+import { Task } from '../../types';
+import { getTasks } from '../Backend';
 
 export class User {
     name: string;
@@ -10,15 +11,19 @@ export class User {
 
     ID: number;
 
+
     constructor(name: string) {
         this.name = name;
         this.balance = new Balance();
         this.tasks = [];
     }
 
+    getTasks() {
+        return getTasks();
+    }
+
     addTask(title: string, price: number) {
-        const newTask = new Task(title, price);
-        this.tasks.push(newTask);
+
     }
 }
 
