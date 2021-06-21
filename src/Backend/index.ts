@@ -6,7 +6,7 @@ export function getTasks(): Task[] {
         ID: 1,
         Type: 'TASK',
         User: 'Max',
-        Text: 'Second Task'
+        Text: 'First Task'
     },
     {
         Date: '2021-06-19T22:00:00.000Z',

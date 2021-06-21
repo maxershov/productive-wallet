@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-      <h1>CARD</h1>
+    <h1>{{ task.Text }}</h1>
   </div>
 </template>
 
@@ -9,5 +9,6 @@ import "./Card.css";
 
 export default {
   name: "card",
+  props: ["task"],
 };
 </script>
