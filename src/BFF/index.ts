@@ -5,15 +5,17 @@ export function getTasks(): Task[] {
         date: '2021-06-19T21:00:00.000Z',
         ID: 1,
         type: 'TASK',
-        user: 'Max',
-        title: 'First Task'
+        userId: 1,
+        title: 'First Task',
+        price: 100,
     },
     {
         date: '2021-06-19T22:00:00.000Z',
         ID: 2,
         type: 'TASK',
-        user: 'John',
-        title: 'Second Task'
+        userId: 2,
+        title: 'Second Task',
+        price: 100,
     }
     ]
 }

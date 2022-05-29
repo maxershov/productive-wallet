@@ -1,7 +1,16 @@
 export type Task = {
-    date: string;
+    date?: string;
     ID: number;
     type: string;
-    user: string;
+    userId: number;
     title: string;
+    price: number;
+}
+
+export type newTask = {
+    date?: string;
+    type?: string;
+    userId: number;
+    title: string;
+    price?: number;
 }
