@@ -1,15 +1,11 @@
-/** //TODO
- * 
- *  */
-
- export class Balance {
+export class Balance {
 
     amount: number;
 
     constructor() {
         this.amount = 0;
     }
-    
+
     getAmount(): number {
         return this.amount;
     }
