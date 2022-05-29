@@ -1,6 +1,6 @@
 import { Balance } from './Balance';
 import { Task } from '../../types';
-import { getTasks } from '../Backend';
+import { getTasks } from '../BFF';
 
 export class User {
     name: string;
