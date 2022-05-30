@@ -44,8 +44,13 @@ func handleUser(w http.ResponseWriter, req *http.Request) {
 		Price:  200}
 	user := &User{Name: "Max", Balance: 100, Tasks: []Task{task1, task2}}
 	fmt.Println("Handle user", user)
+
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Content-Type", "application/json")
+
 	w.WriteHeader(http.StatusOK)
+
 	userJSON, err := json.Marshal(user)
 	if err != nil {
 		fmt.Println(err)
