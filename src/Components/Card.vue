@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <h1>{{ task.title }}</h1>
+    <p class="title">{{ task.title }}</p>
+    <p>{{ task.price }} </p>
+    <p>{{ task.date }} </p>
   </div>
 </template>
 

@@ -1,2 +1,10 @@
 .wrapper {
+    border: 1px solid black;
+    padding: 5px;
+    max-width: 400px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
 }

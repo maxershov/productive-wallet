@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <li v-for="task in tasks" :key="task.id">
+    <h3>Hi {{ userName }} !</h3>
+    <li class="cards" v-for="task in tasks" :key="task.id">
       <Card :task="task" />
     </li>
   </div>
@@ -18,6 +19,7 @@ export default {
   data() {
     return {
       tasks: user.getTasks(),
+      userName: user.name
     };
   },
 };
