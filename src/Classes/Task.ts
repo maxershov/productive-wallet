@@ -6,7 +6,7 @@ export class Task {
     type: string;
     userId: number;
     title: string;
-    price: number
+    price: number;
 
     constructor({ title, userId, type, price }: newTask) {
         this.title = title;
