@@ -1,6 +1,7 @@
 import { Balance } from './Balance';
 import { Task as TaskType } from '../../types';
-import { getTasks } from '../BFF';
+import { addTask, getData } from '../BFF';
+import { newTask } from "../../types";
 import { Task } from '../Classes/Task';
 
 export class User {
@@ -20,12 +21,11 @@ export class User {
     }
 
     getTasks() {
-        return getTasks();
+        return getData();
     }
 
-    addTask(title: string, price: number, type: string) {
-        const newTask = new Task({ title, price, userId: this.ID, type  });
-        this.tasks = [...this.tasks, newTask];
+    addTask(task: TaskType) :Promise<TaskType[]> {
+        return addTask(task);
     }
 }
 

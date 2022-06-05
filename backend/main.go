@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -23,6 +24,8 @@ type Task struct {
 
 func main() {
 	http.HandleFunc("/get-user", handleUser)
+	http.HandleFunc("/add-task", handleAddTask)
+
 	fmt.Printf("Server listen on 8080 port\n")
 	http.ListenAndServe(":8080", nil)
 }
@@ -45,9 +48,7 @@ func handleUser(w http.ResponseWriter, req *http.Request) {
 	user := &User{Name: "Max", Balance: 100, Tasks: []Task{task1, task2}}
 	fmt.Println("Handle user", user)
 
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	w.Header().Set("Content-Type", "application/json")
+	addCorsHeader(w)
 
 	w.WriteHeader(http.StatusOK)
 
@@ -57,4 +58,41 @@ func handleUser(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.Write(userJSON)
+}
+
+func handleAddTask(w http.ResponseWriter, req *http.Request) {
+	addCorsHeader(w)
+
+	// TODO Handle in func
+	if req.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+	body, err := ioutil.ReadAll(req.Body)
+	var data Task
+	json.Unmarshal(body, &data)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Println("Handle add task", data)
+
+	w.WriteHeader(http.StatusOK)
+	user := &User{Name: "Max", Balance: 100, Tasks: []Task{data}}
+
+	userJSON, err := json.Marshal(user)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	w.Write(userJSON)
+}
+
+func addCorsHeader(res http.ResponseWriter) {
+	headers := res.Header()
+	headers.Add("Access-Control-Allow-Origin", "*")
+	headers.Add("Vary", "Origin")
+	headers.Add("Vary", "Access-Control-Request-Method")
+	headers.Add("Vary", "Access-Control-Request-Headers")
+	headers.Add("Access-Control-Allow-Headers", "Content-Type, Origin, Accept, token")
+	headers.Add("Access-Control-Allow-Methods", "GET, POST,OPTIONS")
 }

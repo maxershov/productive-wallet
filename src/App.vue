@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <p>{{data}}</p>
     <h3>Hi {{ userName }} !</h3>
-    <li class="cards" v-for="task in tasks" :key="task.id">
-      <Card :task="task" />
-    </li>
+    <div v-if="data">
+      <p>{{ data }}</p>
+      <li class="cards" v-for="task in data.Tasks" :key="task.id">
+        <Card :task="task" />
+      </li>
+    </div>
+    <button @click="addTask">Add task</button >
   </div>
 </template>
 
@@ -20,13 +23,26 @@ export default {
   components: { Card },
   data() {
     return {
-      tasks: user.getTasks(),
+      data: null,
       userName: user.name,
-      data: null
     };
   },
-  mounted () {
-    getData().then(data => this.data = data)
-   }
+  created() {
+    user.getTasks().then((data) => (this.data = data));
+  },
+  methods: {
+    addTask: () => {
+      const newTask =  {
+      date: "2022-06-19T21:00:00.000Z",
+      ID: 3,
+      type: "TASK",
+      userId: 1,
+      title: "NEW TASK",
+      price: 1000,
+    };
+      user.addTask(newTask)
+      console.log(user.tasks)
+    }
+  }
 };
 </script>
