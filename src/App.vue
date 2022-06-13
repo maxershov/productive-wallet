@@ -12,10 +12,9 @@
 </template>
 
 <script>
-import Card from "./Components/Card";
+import Card from "./Components/Card/Card";
 import "./App.css";
 import { User } from "./Classes/User";
-import { getData } from "./BFF";
 
 const user = new User("Max");
 
