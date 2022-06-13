@@ -11,7 +11,6 @@
       :max="progress.max"
       :value="progress.value"
     />
-    <p>{{ test }}</p>
   </div>
 </template>
 

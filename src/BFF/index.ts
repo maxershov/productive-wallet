@@ -8,6 +8,15 @@ export async function getData(): Promise<Task[]> {
   return json;
 }
 
+export function getDataFromLocalStorage(): string {
+  // TODO: split into diff functions with error handling
+  return JSON.parse(atob(localStorage.getItem("data")));
+}
+
+export function saveDataToLocalStorage(data64: string) {
+  localStorage.setItem("data", data64);
+}
+
 export function getTasks(): Task[] {
   return [
     {
@@ -30,7 +39,7 @@ export function getTasks(): Task[] {
 }
 
 export async function addTask(task: Task): Promise<Task[]> {
-  console.log('fetch add-task')
+  console.log("fetch add-task");
   console.log(JSON.stringify(task));
   const res = await fetch("http://localhost:8080/add-task", {
     method: "POST",

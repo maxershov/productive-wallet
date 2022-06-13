@@ -1,31 +1,40 @@
-import { Balance } from './Balance';
-import { Task as TaskType } from '../../types';
-import { addTask, getData } from '../BFF';
-import { newTask } from "../../types";
-import { Task } from '../Classes/Task';
+import { Balance } from "./Balance";
+import { Task as TaskType } from "../../types";
+import {
+  addTask,
+  getData,
+  getDataFromLocalStorage,
+  saveDataToLocalStorage,
+} from "../BFF";
 
 export class User {
-    name: string;
+  name: string;
 
-    balance: Balance;
+  balance: Balance;
 
-    tasks: TaskType[];
+  tasks: TaskType[];
 
-    ID: number;
+  ID: number;
 
+  constructor(name: string) {
+    this.name = name;
+    this.balance = new Balance();
+    this.tasks = [];
+  }
 
-    constructor(name: string) {
-        this.name = name;
-        this.balance = new Balance();
-        this.tasks = [];
+  getTasks(fromBackend: boolean) {
+      // TODO: move to new method
+    if (fromBackend) {
+      return getData();
     }
+    return getDataFromLocalStorage();
+  }
 
-    getTasks() {
-        return getData();
-    }
+  saveData(data: string) {
+    saveDataToLocalStorage(data);
+  }
 
-    addTask(task: TaskType) :Promise<TaskType[]> {
-        return addTask(task);
-    }
+  addTask(task: TaskType): Promise<TaskType[]> {
+    return addTask(task);
+  }
 }
-
