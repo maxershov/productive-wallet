@@ -2,6 +2,9 @@
   <div id="app">
     <p>{{ user }}</p>
     <h3>Hi {{ user.name }} !</h3>
+    <div v-if="chosenCard">
+      <Edit @save="saveTask" @cancel="cancelEdit" :task="chosenCard" />
+    </div>
     <div v-if="user.tasks">
       <ExportBlock @copyData="copyData" @loadData="loadData" />
       <li class="cards" v-for="task in user.tasks" :key="task.id">
@@ -15,16 +18,19 @@
 <script>
 import Card from "./Components/Card/Card";
 import ExportBlock from "./Components/ExportBlock/ExportBlock";
+import Edit from "./Components/Edit/Edit";
 
 import "./App.css";
 import { User } from "./Classes/User";
+import { Task } from "./Classes/Task";
 
 export default {
-  components: { Card, ExportBlock },
+  components: { Card, ExportBlock, Edit },
   data() {
     return {
       dataProps: null,
       user: null,
+      chosenCard: null,
     };
   },
 
@@ -74,8 +80,16 @@ export default {
     },
 
     editCard(value) {
+      this.chosenCard = this.user.getTaskByID(value);
+    },
+
+    saveTask(value) {
       console.log(value);
-      console.log(this.user.getTaskByID(value));
+      this.$set(this.user, this.user.updateTask(value));
+      this.chosenCard = null;
+    },
+    cancelEdit() {
+      this.chosenCard = null;
     },
   },
 };

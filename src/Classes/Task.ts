@@ -9,7 +9,6 @@ export class Task {
   price: number;
 
   constructor({ title, userId, type, price, date, ID }: taskType) {
-    console.log("newTask", { title, userId, type, price, ID });
     this.title = title;
     this.userId = userId;
     this.type = type;

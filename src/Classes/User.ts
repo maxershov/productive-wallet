@@ -1,5 +1,5 @@
 import { Balance } from "./Balance";
-import { newTask, Task as TaskType } from "../../types";
+import { Task as TaskType } from "../../types";
 import {
   addTask,
   getDataFromLocalStorage,
@@ -41,5 +41,13 @@ export class User {
 
   addTask(task: TaskType): Promise<TaskType[]> {
     return addTask(task);
+  }
+
+  updateTask(task:TaskType) {
+      console.log(task.title)
+    const taskIndex = this.tasks.findIndex(task => task.ID === task.ID);
+    this.tasks[taskIndex] = new Task(task);
+
+    console.log(this.tasks);
   }
 }
