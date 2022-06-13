@@ -2,8 +2,8 @@ export class Balance {
 
     amount: number;
 
-    constructor() {
-        this.amount = 0;
+    constructor(amount: number) {
+        this.amount = amount || 0;
     }
 
     getAmount(): number {

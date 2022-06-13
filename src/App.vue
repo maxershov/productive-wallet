@@ -1,10 +1,11 @@
 <template>
   <div id="app">
+    <p>{{ user }}</p>
     <h3>Hi {{ user.name }} !</h3>
-    <div v-if="dataProps">
+    <div v-if="user.tasks">
       <ExportBlock @copyData="copyData" @loadData="loadData" />
-      <li class="cards" v-for="task in dataProps.Tasks" :key="task.id">
-        <Card :task="task" />
+      <li class="cards" v-for="task in user.tasks" :key="task.id">
+        <Card :task="task" @edit="editCard" />
       </li>
     </div>
     <button @click="addTask">Add task</button>
@@ -28,9 +29,7 @@ export default {
   },
 
   created() {
-    this.user = new User("Max");
-    // this.user.getTasks().then((data) => (this.dataProps = data));
-    this.dataProps = this.user.getTasks();
+    this.user = new User();
   },
 
   methods: {
@@ -46,6 +45,7 @@ export default {
       this.user.addTask(newTask);
       console.log(this.user.tasks);
     },
+
     copyData() {
       // TODO: move to helpers
       const el = document.createElement("textarea");
@@ -67,9 +67,15 @@ export default {
         document.getSelection().addRange(selected);
       }
     },
+
     loadData(value) {
       console.log(value);
       this.user.saveData(value);
+    },
+
+    editCard(value) {
+      console.log(value);
+      console.log(this.user.getTaskByID(value));
     },
   },
 };

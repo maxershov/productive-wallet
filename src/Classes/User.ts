@@ -1,11 +1,11 @@
 import { Balance } from "./Balance";
-import { Task as TaskType } from "../../types";
+import { newTask, Task as TaskType } from "../../types";
 import {
   addTask,
-  getData,
   getDataFromLocalStorage,
   saveDataToLocalStorage,
 } from "../BFF";
+import { Task } from "./Task";
 
 export class User {
   name: string;
@@ -14,20 +14,25 @@ export class User {
 
   tasks: TaskType[];
 
+  data: any;
+
   ID: number;
 
-  constructor(name: string) {
-    this.name = name;
-    this.balance = new Balance();
-    this.tasks = [];
+  constructor() {
+    this.data = getDataFromLocalStorage();
+    console.log(this.data);
+
+    this.name = this.data.name;
+    this.balance = new Balance(this.data.balance.amount);
+    this.tasks = this.data.Tasks.map((task: TaskType) => new Task(task));
   }
 
-  getTasks(fromBackend: boolean) {
-      // TODO: move to new method
-    if (fromBackend) {
-      return getData();
-    }
+  getData() {
     return getDataFromLocalStorage();
+  }
+
+  getTaskByID(id: number): TaskType {
+    return this.tasks.find((task) => task.ID === id);
   }
 
   saveData(data: string) {

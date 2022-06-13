@@ -2,7 +2,7 @@
   <div class="wrapper">
     <p class="title">{{ task.title }}</p>
     <button class="complete">+</button>
-    <button class="edit">⚙</button>
+    <button @click="edit" class="edit">⚙</button>
     <p class="description">{{ "task.descriptions" }}</p>
     <p v-if="task.price" class="price">{{ task.price }}</p>
     <progress
@@ -25,5 +25,10 @@ export default {
       return { max: 100, value: 70 };
     },
   },
+  methods: {
+    edit(){
+        this.$emit('edit', this.task.ID);
+    }
+  }
 };
 </script>
