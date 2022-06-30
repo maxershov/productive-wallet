@@ -27,10 +27,12 @@ func main() {
 	http.HandleFunc("/add-task", handleAddTask)
 
 	fmt.Printf("Server listen on 8080 port\n")
+	ReadData()
 	http.ListenAndServe(":8080", nil)
 }
 
 func handleUser(w http.ResponseWriter, req *http.Request) {
+
 	task1 := Task{
 		Date:   "2021-06-19T21:00:00.000Z",
 		ID:     1,
