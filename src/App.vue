@@ -6,7 +6,6 @@
       <Edit @save="saveTask" @cancel="cancelEdit" :task="chosenCard" />
     </div>
     <div v-if="user.tasks">
-      <ExportBlock @copyData="copyData" @loadData="loadData" />
       <li class="cards" v-for="task in user.tasks" :key="task.id">
         <Card :task="task" @edit="editCard" />
       </li>
@@ -17,7 +16,6 @@
 
 <script>
 import Card from "./Components/Card/Card";
-import ExportBlock from "./Components/ExportBlock/ExportBlock";
 import Edit from "./Components/Edit/Edit";
 
 import "./App.css";
@@ -25,7 +23,7 @@ import { User } from "./Classes/User";
 import { Task } from "./Classes/Task";
 
 export default {
-  components: { Card, ExportBlock, Edit },
+  components: { Card, Edit },
   data() {
     return {
       dataProps: null,
@@ -51,29 +49,6 @@ export default {
       this.user.addTask(newTask);
       console.log(this.user.tasks);
     },
-
-    copyData() {
-      // TODO: move to helpers
-      const el = document.createElement("textarea");
-      const stringData = JSON.stringify(this.dataProps);
-      el.value = Buffer.from(stringData).toString("base64");
-      el.setAttribute("readonly", "");
-      el.style.position = "absolute";
-      el.style.left = "-9999px";
-      document.body.appendChild(el);
-      const selected =
-        document.getSelection().rangeCount > 0
-          ? document.getSelection().getRangeAt(0)
-          : false;
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-      if (selected) {
-        document.getSelection().removeAllRanges();
-        document.getSelection().addRange(selected);
-      }
-    },
-
     loadData(value) {
       console.log(value);
       this.user.saveData(value);

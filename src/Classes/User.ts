@@ -2,8 +2,7 @@ import { Balance } from "./Balance";
 import { Task as TaskType } from "../../types";
 import {
   addTask,
-  getDataFromLocalStorage,
-  saveDataToLocalStorage,
+  getData,
 } from "../BFF";
 import { Task } from "./Task";
 
@@ -19,16 +18,15 @@ export class User {
   ID: number;
 
   constructor() {
-    this.data = getDataFromLocalStorage();
-    console.log(this.data);
-
-    this.name = this.data.name;
-    this.balance = new Balance(this.data.balance.amount);
-    this.tasks = this.data.Tasks.map((task: TaskType) => new Task(task));
+    this.data = {};
+    this.getData();
   }
 
-  getData() {
-    return getDataFromLocalStorage();
+  async getData() {
+    this.data = await getData();
+    this.tasks = this.data.Tasks.map((task: TaskType) => new Task(task));
+    this.balance = new Balance(this.data.balance.amount);
+    this.name = this.data.name;
   }
 
   getTaskByID(id: number): TaskType {
@@ -36,7 +34,7 @@ export class User {
   }
 
   saveData(data: string) {
-    saveDataToLocalStorage(data);
+    
   }
 
   addTask(task: TaskType): Promise<TaskType[]> {

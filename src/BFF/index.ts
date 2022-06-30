@@ -8,15 +8,6 @@ export async function getData(): Promise<Task[]> {
   return json;
 }
 
-export function getDataFromLocalStorage(): string {
-  // TODO: split into diff functions with error handling
-  return JSON.parse(atob(localStorage.getItem("data")));
-}
-
-export function saveDataToLocalStorage(data64: string) {
-  localStorage.setItem("data", data64);
-}
-
 export async function addTask(task: Task): Promise<Task[]> {
   console.log("fetch add-task");
   console.log(JSON.stringify(task));
