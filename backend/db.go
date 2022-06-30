@@ -7,16 +7,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-type task struct {
-	Id     int
-	Date   string
-	Type   string
-	Price  int
-	UserId int
-	Title  string
-}
-
-func ReadData() {
+func ReadData() []Task {
 	fmt.Printf("readDb")
 	db, err := sql.Open("sqlite3", "data.db")
 	if err != nil {
@@ -27,11 +18,11 @@ func ReadData() {
 		panic(err)
 	}
 	defer rows.Close()
-	tasks := []task{}
+	tasks := []Task{}
 
 	for rows.Next() {
-		p := task{}
-		err := rows.Scan(&p.Id, &p.Date, &p.Type, &p.Price, &p.UserId, &p.Title)
+		p := Task{}
+		err := rows.Scan(&p.ID, &p.Date, &p.Type, &p.Price, &p.UserId, &p.Title)
 		if err != nil {
 			fmt.Println(err)
 			continue
@@ -39,7 +30,17 @@ func ReadData() {
 		tasks = append(tasks, p)
 	}
 	for _, p := range tasks {
-		fmt.Println(p.Id, p.Date, p.Type, p.Price, p.UserId, p.Title)
+		fmt.Println(p.ID, p.Date, p.Type, p.Price, p.UserId, p.Title)
 	}
-	fmt.Println(tasks) //
+	fmt.Println(tasks)
+	return tasks
+}
+
+func AddTask() {
+	db, err := sql.Open("sqlite3", "data.db")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	db.Exec("INSERT INTO Tasks (ID, Date, Type, UserId, Price, Title) VALUES ($1,$2,$3,$4,$5, $6)", 3, "2021-06-19T21:00:00.000Z", "TASK", 1, 600, "Third")
 }
