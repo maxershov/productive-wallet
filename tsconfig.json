@@ -8,18 +8,19 @@
         "target": "es6",
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": "."
+        "baseUrl": ".",
     },
+    
     "include": [
         "src/**/*",
         "index.d.ts",
-        "tests/**/*"
+        "declarations.d.ts",
+        "tests/**/*",
     ],
     "exclude": [
         "./node_modules",
         "./build",
         "./dist",
-        "./src/**/*.css",
     ],
     // for alias 
     "paths": {

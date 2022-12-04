@@ -21,7 +21,7 @@ const css = {
   test: /\.css$/,
   use: [
     MiniCssExtractPlugin.loader,
-    { loader: "css-loader", options: { importLoaders: 1 } },
+    { loader: "css-loader", options: { importLoaders: 1, modules: true } },
     "postcss-loader",
   ],
 };
