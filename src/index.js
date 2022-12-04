@@ -1,6 +1,6 @@
-import Vue from 'vue';
-import App from './App.vue';
+/* eslint-disable react/jsx-filename-extension */
+import React, { render } from 'preact/compat';
 
-new Vue({
-  render: (h) => h(App),
-}).$mount('#root');
+import App from './App';
+
+render(<App />, document.getElementById('root'));
