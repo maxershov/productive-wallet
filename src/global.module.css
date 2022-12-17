@@ -1,0 +1,15 @@
+@keyframes color-change {
+  0% {
+    color: #1bff80;
+  }
+  50% {
+    color: #00632c;
+  }
+  100% {
+    color: #1bff80;
+  }
+}
+
+.blink {
+  animation: color-change 3s infinite;
+}
