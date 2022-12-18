@@ -7,7 +7,7 @@
   grid-template-rows: auto;
   grid-template-areas: 
     "title title"
-    "type button"
+    "type edit"
     "price button";
 }
 
@@ -24,10 +24,17 @@
     grid-area: price;
 }
 
-.button {
-    grid-area: button;
+.button, .edit {
     color: #1bff80;
     background: none;
     border: solid 1px #1bff80;
     cursor: pointer;
+}
+
+.button {
+    grid-area: button;
+}
+
+.edit {
+    grid-area: edit;
 }
