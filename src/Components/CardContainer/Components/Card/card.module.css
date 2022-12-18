@@ -18,6 +18,7 @@
 
 .price {
   grid-area: price;
+  font-family: monospace;
 }
 
 .button,

@@ -3,6 +3,7 @@ import styles from './wrapper.module.css';
 import globalStyles from '../../global.module.css';
 
 import CardContainer from '../CardContainer';
+import Time from '../Time';
 import { tasks } from '../../BFF/mock';
 
 const Wrapper: React.FC = () => {
@@ -10,6 +11,7 @@ const Wrapper: React.FC = () => {
     <div className={styles.wrapper}>
       <div className={styles.lines} />
       <div className={styles.container}>
+        <Time />
         <h3 className={`${globalStyles.blink} ${styles.title}`}>JOURNAL</h3>
         {tasks.map((task) => {
           const { ID, userId, title, type, price } = task;
