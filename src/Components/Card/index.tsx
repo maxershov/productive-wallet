@@ -10,6 +10,9 @@ const Card: React.FC<Task> = (props: Task) => {
       <span className={`${globalStyles.blink} ${styles.title}`}>{title}</span>
       <span className={`${globalStyles.blink} ${styles.type}`}>{type}</span>
       <span className={`${globalStyles.blink} ${styles.price}`}>{price}</span>
+      <button type="button" className={styles.button}>
+        <span className={globalStyles.blink}>OK</span>
+      </button>
     </div>
   );
 };

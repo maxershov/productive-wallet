@@ -2,8 +2,32 @@
   color: #1bff80;
   padding: 10px;
   border-top: currentColor solid 1px;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "title title"
+    "type button"
+    "price button";
 }
 
 .title {
   font-weight: bold;
+  grid-area: title;
+}
+
+.type {
+    grid-area: type;
+}
+
+.price {
+    grid-area: price;
+}
+
+.button {
+    grid-area: button;
+    color: #1bff80;
+    background: none;
+    border: solid 1px #1bff80;
+    cursor: pointer;
 }
