@@ -1,16 +1,20 @@
 import React from 'preact/compat';
 import { Task } from 'types';
 import styles from './card.module.css';
-import globalStyles from '../../global.module.css';
+import globalStyles from '../../../../global.module.css';
 
-const Card: React.FC<Task> = (props: Task) => {
-  const { ID, title, type, price } = props;
+type PropsTypes = Task & { onEditClick: () => void };
+
+const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
+  const { ID, title, type, price, userId, onEditClick } = props;
   return (
-    <div className={styles.card}>
+    <div className={styles.grid}>
       <span className={`${globalStyles.blink} ${styles.title}`}>{title}</span>
       <span className={`${globalStyles.blink} ${styles.type}`}>{type}</span>
       <span className={`${globalStyles.blink} ${styles.price}`}>{price}</span>
-      <button type="button" className={styles.edit}><span className={globalStyles.blink}>Edit</span></button>
+      <button onClick={onEditClick} type="button" className={styles.edit}>
+        <span className={globalStyles.blink}>Edit</span>
+      </button>
       <button type="button" className={styles.button}>
         <span className={globalStyles.blink}>OK</span>
       </button>

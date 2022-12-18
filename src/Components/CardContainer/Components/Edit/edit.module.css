@@ -1,0 +1,44 @@
+.edit {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'title title'
+    'type cancel'
+    'price button';
+}
+
+.title {
+  font-weight: bold;
+  background: #1bff80;
+  grid-area: title;
+}
+
+.type {
+  font-weight: bold;
+  background: #1bff80;
+  grid-area: type;
+}
+
+.price {
+  font-weight: bold;
+  background: #1bff80;
+  grid-area: price;
+}
+
+.button,
+.cancel {
+  background: #1bff80;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.button {
+  grid-area: button;
+}
+
+.cancel {
+  grid-area: cancel;
+}

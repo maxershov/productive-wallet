@@ -2,7 +2,7 @@ import React from 'preact/compat';
 import styles from './wrapper.module.css';
 import globalStyles from '../../global.module.css';
 
-import Card from '../Card';
+import CardContainer from '../CardContainer';
 import { tasks } from '../../BFF/mock';
 
 const Wrapper: React.FC = () => {
@@ -14,7 +14,7 @@ const Wrapper: React.FC = () => {
         {tasks.map((task) => {
           const { ID, userId, title, type, price } = task;
           return (
-            <Card
+            <CardContainer
               ID={ID}
               title={title}
               type={type}
