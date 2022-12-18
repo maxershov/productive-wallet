@@ -29,6 +29,10 @@
     background: none;
     border: solid 1px #1bff80;
     cursor: pointer;
+    
+    &:hover {
+        border: solid 1px red;
+    }
 }
 
 .button {
