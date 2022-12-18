@@ -2,36 +2,50 @@
   display: grid;
   grid-template-rows: auto;
   grid-template-areas:
-    'title title'
-    'type cancel'
-    'price button';
+    'title title title'
+    'type type cancel'
+    'price price button';
+  /* justify-content: space-between; */
+  align-items: start;
+}
+
+.title,
+.type,
+.price {
+  border: none;
+  margin: 1px 0;
+  font-weight: bold;
+  background: #1bff80;
 }
 
 .title {
-  font-weight: bold;
-  background: #1bff80;
+  font-size: 12px;
   grid-area: title;
 }
 
 .type {
-  font-weight: bold;
-  background: #1bff80;
+  font-size: 10px;
   grid-area: type;
 }
 
 .price {
   font-weight: bold;
-  background: #1bff80;
+  font-size: 10px;
   grid-area: price;
+  font-family: monospace;
 }
 
 .button,
 .cancel {
   background: #1bff80;
+  font-weight: bold;
+  font-size: 10px;
+  color: black;
+  border: 1px solid black;
   cursor: pointer;
 
   &:hover {
-    opacity: 0.7;
+    opacity: 0.6;
   }
 }
 

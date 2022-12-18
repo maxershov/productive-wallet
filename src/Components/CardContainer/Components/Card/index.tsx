@@ -13,7 +13,7 @@ const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
       <span className={`${globalStyles.blink} ${styles.type}`}>{type}</span>
       <span className={`${globalStyles.blink} ${styles.price}`}>{price}</span>
       <button onClick={onEditClick} type="button" className={styles.edit}>
-        <span className={globalStyles.blink}>Edit</span>
+        <span className={globalStyles.blink}>EDIT</span>
       </button>
       <button type="button" className={styles.button}>
         <span className={globalStyles.blink}>OK</span>

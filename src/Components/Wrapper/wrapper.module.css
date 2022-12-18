@@ -1,4 +1,5 @@
 .wrapper {
+  /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(29,29,29,1) 25%, rgba(61,60,60,1) 47%, rgba(29,29,29,1) 75%, rgba(0,0,0,1) 100%); */
   background: radial-gradient(
     97.8% 60.23% at 50% 50%,
     #2f2f2d 8.29%,
@@ -10,6 +11,7 @@
 }
 
 .lines {
+  background-size: 2px 2px;
   pointer-events: none;
   background-image: repeating-linear-gradient(#000 4px, transparent 6px);
   height: 100%;
