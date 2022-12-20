@@ -5,6 +5,7 @@
     "jest"
   ],
   "extends": [
+    "airbnb",
     "airbnb-typescript",
     "react-app",
     "plugin:@typescript-eslint/recommended",
@@ -39,6 +40,7 @@
     "react/destructuring-assignment": "off",
     "import/no-cycle": 0,
     "import/no-named-as-default": 0,
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }]
   }
 }

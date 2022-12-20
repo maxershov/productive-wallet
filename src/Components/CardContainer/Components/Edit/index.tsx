@@ -5,7 +5,7 @@ import styles from './edit.module.css';
 type PropsTypes = Task & { onCancelClick: () => void };
 
 const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
-  const { ID, title, type, price, onCancelClick } = props;
+  const { title, type, price, onCancelClick } = props;
   return (
     <div className={styles.edit}>
       <input className={styles.title} value={title} />

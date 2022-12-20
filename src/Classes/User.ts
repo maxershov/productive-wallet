@@ -39,9 +39,7 @@ export class User {
   }
 
   updateTask(task: TaskType): void {
-    const taskIndex = this.tasks.findIndex((task) => task.ID === task.ID);
+    const taskIndex = this.tasks.findIndex((taskIn) => taskIn.ID === task.ID);
     this.tasks[taskIndex] = new Task(task);
-
-    console.log(this.tasks);
   }
 }
