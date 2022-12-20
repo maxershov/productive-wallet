@@ -6,10 +6,10 @@
   grid-template-areas:
     'title title title'
     'type none edit'
-    'price none button';
+    'price date button';
 }
 
-.title, .type, .price {
+.title, .type, .price, .date {
   font-weight: bold;
   font-size: 10px;
 }
@@ -22,7 +22,7 @@
   grid-area: type;
 }
 
-.price {
+.price, .date {
   grid-area: price;
   font-family: monospace;
 }
@@ -50,4 +50,8 @@
 
 .edit {
   grid-area: edit;
+}
+
+.date {
+  grid-area: date;
 }

@@ -15,13 +15,14 @@ const Wrapper: React.FC = () => {
         <Time />
         <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
         {tasks.map((task) => {
-          const { ID, userId, title, type, price } = task;
+          const { ID, userId, title, type, price, date } = task;
           return (
             <CardContainer
               ID={ID}
               title={title}
               type={type}
               price={price}
+              date={date}
               userId={userId}
             />
           );

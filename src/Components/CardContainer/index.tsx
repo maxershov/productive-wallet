@@ -6,7 +6,7 @@ import Edit from './Components/Edit';
 import styles from './card_container.module.css';
 
 const CardContainer: React.FC<Task> = (props: Task) => {
-  const { ID, title, type, price, userId } = props;
+  const { ID, title, type, price, date, userId } = props;
   const [isEdit, setIsEdit] = useState(false);
 
   function onCancelClick() {
@@ -25,6 +25,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
           ID={ID}
           title={title}
           type={type}
+          date={date}
           price={price}
           onCancelClick={onCancelClick}
         />
@@ -34,6 +35,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
           title={title}
           type={type}
           price={price}
+          date={date}
           userId={userId}
           onEditClick={onEditClick}
         />
