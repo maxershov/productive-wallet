@@ -1,6 +1,7 @@
 import React from 'preact/compat';
+import { cn } from '../../Utils/ClassNames';
 import styles from './wrapper.module.css';
-import globalStyles from '../../global.module.css';
+import global from '../../global.module.css';
 
 import CardContainer from '../CardContainer';
 import Time from '../Time';
@@ -12,7 +13,7 @@ const Wrapper: React.FC = () => {
       <div className={styles.lines} />
       <div className={styles.container}>
         <Time />
-        <h3 className={`${globalStyles.blink} ${styles.title}`}>JOURNAL</h3>
+        <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
         {tasks.map((task) => {
           const { ID, userId, title, type, price } = task;
           return (
