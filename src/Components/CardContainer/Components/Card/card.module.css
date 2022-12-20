@@ -9,20 +9,20 @@
     'price none button';
 }
 
-.title {
+.title, .type, .price {
   font-weight: bold;
+  font-size: 10px;
+}
+
+.title {
   grid-area: title;
 }
 
-.type {
-  font-weight: bold;
-  font-size: 10px;
+.type {  
   grid-area: type;
 }
 
 .price {
-  font-weight: bold;
-  font-size: 10px;
   grid-area: price;
   font-family: monospace;
 }

@@ -6,7 +6,7 @@ import globalStyles from '../../../../global.module.css';
 type PropsTypes = Task & { onEditClick: () => void };
 
 const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
-  const { ID, title, type, price, userId, onEditClick } = props;
+  const { ID, title, type, price, onEditClick } = props;
   return (
     <div className={styles.grid}>
       <span className={`${globalStyles.blink} ${styles.title}`}>{title}</span>

@@ -5,7 +5,6 @@
     'title title title'
     'type type cancel'
     'price price button';
-  /* justify-content: space-between; */
   align-items: start;
 }
 
@@ -29,7 +28,6 @@
 }
 
 .price {
-  font-weight: bold;
   font-size: 10px;
   grid-area: price;
   font-family: monospace;
