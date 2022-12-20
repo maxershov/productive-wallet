@@ -1,11 +1,11 @@
 import React from 'preact/compat';
-import { cn } from '../../Utils/ClassNames';
+import { cn } from '@/Utils/ClassNames';
 import styles from './wrapper.module.css';
-import global from '../../global.module.css';
+import global from '@/global.module.css';
 
 import CardContainer from '../CardContainer';
 import Time from '../Time';
-import { tasks } from '../../BFF/mock';
+import { tasks } from '@/BFF/mock';
 
 const Wrapper: React.FC = () => {
   return (

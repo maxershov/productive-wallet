@@ -1,8 +1,8 @@
 import React from 'preact/compat';
 import { Task } from 'types';
-import { cn } from '../../../../Utils/ClassNames';
+import { cn } from '@/Utils/ClassNames';
 import styles from './card.module.css';
-import global from '../../../../global.module.css';
+import global from '@/global.module.css';
 
 type PropsTypes = Task & { onEditClick: () => void };
 
