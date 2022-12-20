@@ -31,21 +31,23 @@ func main() {
 }
 
 func handleUser(w http.ResponseWriter, req *http.Request) {
-	task1 := Task{
-		Date:   "2021-06-19T21:00:00.000Z",
-		ID:     1,
-		Type:   "TASK",
-		UserId: 1,
-		Title:  "First Task",
-		Price:  100}
-	task2 := Task{
-		Date:   "2021-07-19T21:00:00.000Z",
-		ID:     2,
-		Type:   "TASK",
-		UserId: 1,
-		Title:  "SecondTask",
-		Price:  200}
-	user := &User{Name: "Max", Balance: 100, Tasks: []Task{task1, task2}}
+
+	tasks := ReadData()
+	// task1 := Task{
+	// 	Date:   "2021-06-19T21:00:00.000Z",
+	// 	ID:     1,
+	// 	Type:   "TASK",
+	// 	UserId: 1,
+	// 	Title:  "First Task",
+	// 	Price:  100}
+	// task2 := Task{
+	// 	Date:   "2021-07-19T21:00:00.000Z",
+	// 	ID:     2,
+	// 	Type:   "TASK",
+	// 	UserId: 1,
+	// 	Title:  "SecondTask",
+	// 	Price:  200}
+	user := &User{Name: "Max", Balance: 100, Tasks: tasks}
 	fmt.Println("Handle user", user)
 
 	addCorsHeader(w)
@@ -84,6 +86,7 @@ func handleAddTask(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 		return
 	}
+	AddTask()
 	w.Write(userJSON)
 }
 

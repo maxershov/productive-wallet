@@ -1,12 +1,9 @@
 :root {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: Georgia, serif;
-}
-
-.cards {
-    list-style: none;
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #000000;
 }

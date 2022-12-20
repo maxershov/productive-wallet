@@ -1,0 +1,57 @@
+.grid {
+  display: grid;
+  grid-template-rows: auto;
+  justify-content: space-between;
+  align-items: start;
+  grid-template-areas:
+    'title title title'
+    'type none edit'
+    'price date button';
+}
+
+.title, .type, .price, .date {
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.title {
+  grid-area: title;
+}
+
+.type {  
+  grid-area: type;
+}
+
+.price, .date {
+  grid-area: price;
+  font-family: monospace;
+}
+
+.button,
+.edit {
+  font-weight: bold;
+  font-size: 10px;
+  width: 100px;
+  color: #1bff80;
+  background: none;
+  border: solid 1px #1bff80;
+  cursor: pointer;
+  border-radius: 2px;
+  margin: 2px 0;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.button {
+  grid-area: button;
+}
+
+.edit {
+  grid-area: edit;
+}
+
+.date {
+  grid-area: date;
+}

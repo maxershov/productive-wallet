@@ -1,0 +1,56 @@
+.edit {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'title title title'
+    'type type cancel'
+    'price price button';
+  align-items: start;
+}
+
+.title,
+.type,
+.price {
+  border: none;
+  margin: 1px 0;
+  font-weight: bold;
+  background: #1bff80;
+}
+
+.title {
+  font-size: 12px;
+  grid-area: title;
+}
+
+.type {
+  font-size: 10px;
+  grid-area: type;
+}
+
+.price {
+  font-size: 10px;
+  grid-area: price;
+  font-family: monospace;
+}
+
+.button,
+.cancel {
+  background: #1bff80;
+  font-weight: bold;
+  font-size: 10px;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.button {
+  grid-area: button;
+}
+
+.cancel {
+  grid-area: cancel;
+}
