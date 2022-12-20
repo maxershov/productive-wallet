@@ -6,6 +6,7 @@ export const task0: Task = {
   userId: 0,
   title: 'FIRST TASK',
   price: 10,
+  date: "2023-03-19T21:00:00.000Z",
 };
 
 export const task1: Task = {
@@ -22,6 +23,7 @@ export const task2: Task = {
   userId: 0,
   title: 'THIRD TASK',
   price: 35,
+  date: "2022-11-19T21:00:00.000Z",
 };
 
 export const tasks = [task0, task1, task2];
