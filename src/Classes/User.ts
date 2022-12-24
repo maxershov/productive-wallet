@@ -20,9 +20,16 @@ export class User {
     this.getData();
   }
 
-  async getData(): Promise<void> {
+  getData(): void {
     this.data = getLocalData();
     this.tasks = this.data.map((task: TaskType) => new Task(task));
+    this.balance = new Balance(0);
+    this.name = 'TEST NAME';
+  }
+
+  async syncData(): Promise<void> {
+    this.data = await fetchData();
+    this.tasks = this.data.Tasks.map((task: TaskType) => new Task(task));
     this.balance = new Balance(0);
     this.name = 'TEST NAME';
   }
