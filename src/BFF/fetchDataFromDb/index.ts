@@ -1,7 +1,7 @@
 import { getCredentials } from '@/BFF/getCredentials';
 import { Task } from 'types';
 
-export async function fetchData(): Promise<Task[]> {
+export async function fetchDataFromDb(): Promise<Task[]> {
   const { api, key } = getCredentials();
   const res = await fetch(api, {
     cache: 'no-cache',

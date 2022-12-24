@@ -1,5 +1,5 @@
 import { Task } from 'types';
 
-export function saveData(data: Task[]) {
+export function saveLocalData(data: Task[]) {
   localStorage.setItem('data', JSON.stringify(data));
 }

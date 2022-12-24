@@ -1,8 +1,9 @@
 import { Balance } from './Balance';
 import { Task as TaskType } from '../../types';
 import { getLocalData } from '@/BFF/getLocalData';
-import { fetchData } from '@/BFF/fetchData';
+import { fetchDataFromDb } from '@/BFF/fetchDataFromDb';
 import { Task } from './Task';
+import { saveLocalData } from '@/BFF/saveLocalData';
 
 export class User {
   name: string;
@@ -27,11 +28,10 @@ export class User {
     this.name = 'TEST NAME';
   }
 
-  async syncData(): Promise<void> {
-    this.data = await fetchData();
+  async fetchData(): Promise<void> {
+    this.data = await fetchDataFromDb();
     this.tasks = this.data.Tasks.map((task: TaskType) => new Task(task));
-    this.balance = new Balance(0);
-    this.name = 'TEST NAME';
+    saveLocalData(this.data);
   }
 
   getTaskByID(id: number): TaskType {
