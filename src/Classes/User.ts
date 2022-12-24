@@ -1,6 +1,7 @@
 import { Balance } from './Balance';
 import { Task as TaskType } from '../../types';
-import { addTask, getData } from '../BFF';
+import { getLocalData } from '@/BFF/getLocalData';
+import { fetchData } from '@/BFF/fetchData';
 import { Task } from './Task';
 
 export class User {
@@ -20,22 +21,14 @@ export class User {
   }
 
   async getData(): Promise<void> {
-    this.data = await getData();
-    this.tasks = this.data.Tasks.map((task: TaskType) => new Task(task));
-    this.balance = new Balance(this.data.balance.amount);
-    this.name = this.data.name;
+    this.data = getLocalData();
+    this.tasks = this.data.map((task: TaskType) => new Task(task));
+    this.balance = new Balance(0);
+    this.name = 'TEST NAME';
   }
 
   getTaskByID(id: number): TaskType {
     return this.tasks.find((task) => task.ID === id);
-  }
-
-  // saveData(data: string) {
-  // }
-
-  // eslint-disable-next-line class-methods-use-this
-  addTask(task: TaskType): Promise<TaskType[]> {
-    return addTask(task);
   }
 
   updateTask(task: TaskType): void {
