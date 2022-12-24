@@ -83,7 +83,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
-      title: "ChangeME",
+      title: "Journal",
     }),
     new MiniCssExtractPlugin(),
   ],
