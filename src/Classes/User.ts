@@ -21,6 +21,11 @@ export class User {
     this.getData();
   }
 
+  // TODO: DELETE
+  logTasks() {
+    console.log(this.tasks);
+  }
+
   getData(): void {
     this.data = getLocalData();
     this.tasks = this.data.map((task: TaskType) => new Task(task));
@@ -41,5 +46,9 @@ export class User {
   updateTask(task: TaskType): void {
     const taskIndex = this.tasks.findIndex((taskIn) => taskIn.ID === task.ID);
     this.tasks[taskIndex] = new Task(task);
+    
+    saveLocalData(this.tasks);
   }
 }
+
+export const user = new User();
