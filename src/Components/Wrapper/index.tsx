@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'preact/compat';
 import { cn } from '@/Utils/ClassNames';
-import { User } from '@/Classes/User';
+import { user } from '@/Classes/User';
 import styles from './wrapper.module.css';
 import global from '@/global.module.css';
 
 import CardContainer from '../CardContainer';
 import Time from '../Time';
 import { Task } from 'types';
-
-const user = new User();
+import { CardsContext } from '@/Components/Context';
 
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
@@ -16,7 +15,11 @@ const Wrapper: React.FC = () => {
   useEffect(() => {
     const tasks = user.tasks;
     setTasks(tasks);
-  }, []);
+  }, [tasks]);
+
+  const setTask = () => {
+    setTasks([...tasks]);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -24,20 +27,22 @@ const Wrapper: React.FC = () => {
       <div className={styles.container}>
         <Time />
         <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
-        {tasks &&
-          tasks.map((task) => {
-            const { ID, userId, title, type, price, date } = task;
-            return (
-              <CardContainer
-                ID={ID}
-                title={title}
-                type={type}
-                price={price}
-                date={date}
-                userId={userId}
-              />
-            );
-          })}
+        <CardsContext.Provider value={[tasks, setTask]}>
+          {tasks &&
+            tasks.map((task) => {
+              const { ID, userId, title, type, price, date } = task;
+              return (
+                <CardContainer
+                  ID={ID}
+                  title={title}
+                  type={type}
+                  price={price}
+                  date={date}
+                  userId={userId}
+                />
+              );
+            })}
+        </CardsContext.Provider>
       </div>
     </div>
   );
