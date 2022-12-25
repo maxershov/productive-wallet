@@ -19,6 +19,6 @@ export class Task {
     this.type = type;
     this.price = price;
     this.ID = ID;
-    this.date = date || new Date().toString();
+    this.date = date;
   }
 }

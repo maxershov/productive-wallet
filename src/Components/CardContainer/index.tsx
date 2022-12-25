@@ -9,7 +9,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
   const { ID, title, type, price, date, userId } = props;
   const [isEdit, setIsEdit] = useState(false);
 
-  function onCancelClick() {
+  function onCloseEdit() {
     setIsEdit(false);
   }
 
@@ -27,7 +27,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
           type={type}
           date={date}
           price={price}
-          onCancelClick={onCancelClick}
+          onCloseEdit={onCloseEdit}
         />
       ) : (
         <Card

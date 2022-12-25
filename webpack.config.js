@@ -73,7 +73,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
-      title: "ChangeME",
+      title: "Journal",
       favicon: path.join(__dirname, "src", "assets", "favicon.ico"),
       minify: {
         removeComments: true,
