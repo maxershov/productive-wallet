@@ -1,4 +1,4 @@
-import { getCredentials } from '@/BFF/getCredentials';
+import { getCredentials } from '@/BFF/credentials';
 import { Task } from 'types';
 
 export async function fetchDataFromDb(): Promise<Task[]> {

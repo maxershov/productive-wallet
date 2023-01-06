@@ -1,4 +1,4 @@
 .time {
-    color: #1bff80;
+    color: var(--text-color);
     font-family: monospace;
 }

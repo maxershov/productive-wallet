@@ -4,6 +4,7 @@ import { user } from '@/Classes/User';
 import styles from './wrapper.module.css';
 import global from '@/global.module.css';
 
+import WithToken from '../WithToken';
 import CardContainer from '../CardContainer';
 import Time from '../Time';
 import { Task } from 'types';
@@ -27,22 +28,24 @@ const Wrapper: React.FC = () => {
       <div className={styles.container}>
         <Time />
         <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
-        <CardsContext.Provider value={[tasks, setTask]}>
-          {tasks &&
-            tasks.map((task) => {
-              const { ID, userId, title, type, price, date } = task;
-              return (
-                <CardContainer
-                  ID={ID}
-                  title={title}
-                  type={type}
-                  price={price}
-                  date={date}
-                  userId={userId}
-                />
-              );
-            })}
-        </CardsContext.Provider>
+        <WithToken>
+          <CardsContext.Provider value={[tasks, setTask]}>
+            {tasks &&
+              tasks.map((task) => {
+                const { ID, userId, title, type, price, date } = task;
+                return (
+                  <CardContainer
+                    ID={ID}
+                    title={title}
+                    type={type}
+                    price={price}
+                    date={date}
+                    userId={userId}
+                  />
+                );
+              })}
+          </CardsContext.Provider>
+        </WithToken>
       </div>
     </div>
   );
