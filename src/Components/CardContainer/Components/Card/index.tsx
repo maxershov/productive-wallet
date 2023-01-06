@@ -19,9 +19,15 @@ const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
 
   return (
     <div className={styles.grid}>
-      <span className={cn([global.blink, styles.title])}>{title}</span>
-      <span className={cn([global.blink, styles.type])}>{type}</span>
-      <span className={cn([global.blink, styles.price])}>{price}</span>
+      <span className={cn([global.blink, styles.title])} onClick={onEdit}>
+        {title}
+      </span>
+      <span className={cn([global.blink, styles.type])} onClick={onEdit}>
+        {type}
+      </span>
+      <span className={cn([global.blink, styles.price])} onClick={onEdit}>
+        {price}
+      </span>
       <span className={cn([global.blink, styles.date])}>{timeLeft}</span>
       <button onClick={onEdit} type="button" className={styles.edit}>
         <span className={global.blink}>EDIT</span>
