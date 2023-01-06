@@ -1,20 +1,36 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { useState } from 'preact/compat';
+import React, { useState, useContext } from 'preact/compat';
+import { BalanceContext, CardsContext } from '@/Components/Context';
+import { user } from '@/Classes/User';
 import { Task } from 'types';
+
 import Card from './Components/Card';
 import Edit from './Components/Edit';
+
 import styles from './card_container.module.css';
 
 const CardContainer: React.FC<Task> = (props: Task) => {
   const { ID, title, type, price, date, userId } = props;
+
+  console.log(`card rendered ${ID}`);
+
+  const [, updateBalance] = useContext(BalanceContext);
+  const [, updateTasks] = useContext(CardsContext);
+
   const [isEdit, setIsEdit] = useState(false);
 
   function onCloseEdit() {
     setIsEdit(false);
   }
 
-  function onEditClick() {
+  function onEdit() {
     setIsEdit(true);
+  }
+
+  function onComplete(ID: number) {
+    user.completeTask(ID);
+    updateBalance();
+    updateTasks();
   }
 
   return (
@@ -37,7 +53,8 @@ const CardContainer: React.FC<Task> = (props: Task) => {
           price={price}
           date={date}
           userId={userId}
-          onEditClick={onEditClick}
+          onEdit={onEdit}
+          onComplete={onComplete}
         />
       )}
     </div>

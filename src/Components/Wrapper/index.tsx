@@ -6,46 +6,58 @@ import global from '@/global.module.css';
 
 import WithToken from '../WithToken';
 import CardContainer from '../CardContainer';
-import Time from '../Time';
+import StatusBar from '../StatusBar';
 import { Task } from 'types';
-import { CardsContext } from '@/Components/Context';
+import { CardsContext, BalanceContext } from '@/Components/Context';
 
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
+  const [balance, setBalance] = useState<Number | undefined>();
 
   useEffect(() => {
     const tasks = user.tasks;
     setTasks(tasks);
   }, [tasks]);
 
-  const setTask = () => {
+  useEffect(() => {
+    const balance = user.balance;
+    setBalance(balance.getAmount());
+  }, [balance]);
+
+  const updateTasks = () => {
     setTasks([...tasks]);
+  };
+
+  const updateBalance = () => {
+    setBalance(user.balance.getAmount());
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.lines} />
       <div className={styles.container}>
-        <Time />
-        <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
-        <WithToken>
-          <CardsContext.Provider value={[tasks, setTask]}>
-            {tasks &&
-              tasks.map((task) => {
-                const { ID, userId, title, type, price, date } = task;
-                return (
-                  <CardContainer
-                    ID={ID}
-                    title={title}
-                    type={type}
-                    price={price}
-                    date={date}
-                    userId={userId}
-                  />
-                );
-              })}
-          </CardsContext.Provider>
-        </WithToken>
+        <BalanceContext.Provider value={[balance, updateBalance]}>
+          <StatusBar />
+          <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
+          <WithToken>
+            <CardsContext.Provider value={[tasks, updateTasks]}>
+              {tasks &&
+                tasks.map((task) => {
+                  const { ID, userId, title, type, price, date } = task;
+                  return (
+                    <CardContainer
+                      ID={ID}
+                      title={title}
+                      type={type}
+                      price={price}
+                      date={date}
+                      userId={userId}
+                    />
+                  );
+                })}
+            </CardsContext.Provider>
+          </WithToken>
+        </BalanceContext.Provider>
       </div>
     </div>
   );
