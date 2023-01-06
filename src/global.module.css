@@ -1,12 +1,12 @@
 @keyframes color-change {
   0% {
-    color: #1bff80;
+    color: var(--text-color);;
   }
   50% {
     color: #00632c;
   }
   100% {
-    color: #1bff80;
+    color: var(--text-color);
   }
 }
 

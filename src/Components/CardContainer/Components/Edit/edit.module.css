@@ -14,7 +14,7 @@
   border: none;
   margin: 1px 0;
   font-weight: bold;
-  background: #1bff80;
+  background: var(--text-color);
 }
 
 .title {
@@ -35,7 +35,7 @@
 
 .button,
 .cancel {
-  background: #1bff80;
+  background: var(--text-color);
   font-weight: bold;
   font-size: 10px;
   color: black;

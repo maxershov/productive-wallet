@@ -1,5 +1,6 @@
 :root {
   box-sizing: border-box;
+  --text-color: #1bff80;
 }
 
 body {

@@ -1,5 +1,5 @@
 .card {
-  color: #1bff80;
+  color: var(--text-color);
   padding: 10px;
   border-top: currentColor solid 1px;
 }
