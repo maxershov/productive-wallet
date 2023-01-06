@@ -9,7 +9,7 @@ type PropsTypes = Task & { onCloseEdit: () => void };
 const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
   const { userId, ID, title, type, price, onCloseEdit } = props;
 
-  const [, setTask] = useContext(CardsContext);
+  const [, updateTasks] = useContext(CardsContext);
 
   function updateTask(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
     const editedTask = { title, type, price: parseInt(price), ID, userId };
 
     user.updateTask(editedTask);
-    setTask();
+    updateTasks();
     onCloseEdit();
   }
 
