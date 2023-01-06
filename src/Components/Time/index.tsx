@@ -3,16 +3,16 @@ import { cn } from '@/Utils/ClassNames';
 import styles from './time.module.css';
 import global from '@/global.module.css';
 
-function toTwoDigits(time: number) {
-  return time.toString().padStart(2, '0');
-}
-
 const Time: React.FC = () => {
   const [today, setToday] = useState(new Date());
-  const date = `${today.getFullYear()}-${
-    today.getMonth() + 1
-  }-${today.getDate()}`;
-  const time = `${today.getHours()}:${toTwoDigits(today.getMinutes())}`;
+  const date = new Intl.DateTimeFormat('en-GB', {
+    weekday: 'long',
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(today);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,11 +22,7 @@ const Time: React.FC = () => {
     return () => clearInterval(interval);
   }, [today]);
 
-  return (
-    <div className={cn([global.blink, styles.time])}>
-      {date} {time}
-    </div>
-  );
+  return <div className={cn([global.blink, styles.time])}>{date}</div>;
 };
 
 export default Time;
