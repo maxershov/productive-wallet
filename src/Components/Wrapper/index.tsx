@@ -6,7 +6,7 @@ import global from '@/global.module.css';
 
 import WithToken from '../WithToken';
 import CardContainer from '../CardContainer';
-import Time from '../Time';
+import StatusBar from '../StatusBar';
 import { Task } from 'types';
 import { CardsContext } from '@/Components/Context';
 
@@ -26,7 +26,7 @@ const Wrapper: React.FC = () => {
     <div className={styles.wrapper}>
       <div className={styles.lines} />
       <div className={styles.container}>
-        <Time />
+        <StatusBar />
         <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
         <WithToken>
           <CardsContext.Provider value={[tasks, setTask]}>
