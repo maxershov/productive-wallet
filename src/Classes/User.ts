@@ -33,6 +33,24 @@ export class User {
     saveLocalData(this.data);
   }
 
+  getID() {
+    const IDs = this.tasks.map((task) => {
+      return task.ID;
+    });
+    return Math.max(...IDs) + 1;
+  }
+
+  createTask() {
+    const newTask = {
+      title: 'NEW TASK',
+      type: '',
+      price: 0,
+      ID: this.getID(),
+      userId: 0,
+    };
+    this.tasks.push(newTask);
+  }
+
   getTaskByID(id: number): TaskType {
     return this.tasks.find((task) => task.ID === id);
   }
@@ -57,13 +75,7 @@ export class User {
     const taskToComplete = this.getTaskByID(ID);
     const addToBalance = taskToComplete.price;
 
-    console.log(this.tasks);
-    console.log(this.data.tasks);
-
     this.deleteTaskByID(ID);
-
-    console.log(this.tasks);
-    console.log(this.data.tasks);
 
     this.balance.add(addToBalance);
     saveLocalData(this.data);
