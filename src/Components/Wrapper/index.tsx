@@ -9,6 +9,7 @@ import CardContainer from '../CardContainer';
 import StatusBar from '../StatusBar';
 import { Task } from 'types';
 import { CardsContext, BalanceContext } from '@/Components/Context';
+import AddTask from '../AddTask';
 
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
@@ -17,7 +18,7 @@ const Wrapper: React.FC = () => {
   useEffect(() => {
     const tasks = user.tasks;
     setTasks(tasks);
-  }, [tasks]);
+  }, []);
 
   useEffect(() => {
     const balance = user.balance;
@@ -25,7 +26,8 @@ const Wrapper: React.FC = () => {
   }, [balance]);
 
   const updateTasks = () => {
-    setTasks([...tasks]);
+    // TODO fix rerenders in card
+    setTasks([...user.tasks]);
   };
 
   const updateBalance = () => {
@@ -46,6 +48,7 @@ const Wrapper: React.FC = () => {
                   const { ID, userId, title, type, price, date } = task;
                   return (
                     <CardContainer
+                      key={ID}
                       ID={ID}
                       title={title}
                       type={type}
@@ -55,6 +58,7 @@ const Wrapper: React.FC = () => {
                     />
                   );
                 })}
+              <AddTask />
             </CardsContext.Provider>
           </WithToken>
         </BalanceContext.Provider>

@@ -1,10 +1,10 @@
-import { Task } from '@/Classes/Task';
+import { Task as TaskType } from '../../../../../types';
 import { user } from '@/Classes/User';
 import { CardsContext } from '@/Components/Context';
 import React, { useContext } from 'preact/compat';
 import styles from './edit.module.css';
 
-type PropsTypes = Task & { onCloseEdit: () => void };
+type PropsTypes = TaskType & { onCloseEdit: () => void };
 
 const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
   const { userId, ID, title, type, price, onCloseEdit } = props;
@@ -25,7 +25,7 @@ const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
   }
 
   return (
-    <form className={styles.edit} onSubmit={updateTask}>
+    <form className={styles.edit} onSubmit={updateTask} autoComplete="off">
       <input className={styles.title} value={title} name="title" />
       <input className={styles.type} value={type} name="type" />
       <input
