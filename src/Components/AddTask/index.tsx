@@ -2,7 +2,7 @@ import React, { useContext } from 'preact/compat';
 import { CardsContext } from '@/Components/Context';
 import { user } from '@/Classes/User';
 
-import styles from './add_task.module.css';
+import global from '@/global.module.css';
 
 const AddTask: React.FC = () => {
   const [, updateTasks] = useContext(CardsContext);
@@ -13,8 +13,8 @@ const AddTask: React.FC = () => {
   }
 
   return (
-    <button className={styles.button} onClick={addTask}>
-        +
+    <button className={global.button} onClick={addTask}>
+      +
     </button>
   );
 };

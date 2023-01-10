@@ -1,6 +1,6 @@
 @keyframes color-change {
   0% {
-    color: var(--text-color);;
+    color: var(--text-color);
   }
   50% {
     color: #00632c;
@@ -12,4 +12,15 @@
 
 .blink {
   animation: color-change 3s infinite;
+}
+
+.button {
+  color: var(--text-color);
+  background: none;
+  border: solid 1px var(--text-color);
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }
