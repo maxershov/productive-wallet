@@ -1,9 +1,9 @@
 import { Balance } from './Balance';
-import { Task as TaskType } from '../../types';
+import { Task as TaskType, User as UserType } from '../../types';
 import { getLocalData } from '@/BFF/getLocalData';
 import { fetchDataFromDb } from '@/BFF/fetchDataFromDb';
 import { saveLocalData } from '@/BFF/saveLocalData';
-
+import { syncDataToDb } from '@/BFF/syncDataToDb';
 export class User {
   name: string;
 
@@ -17,20 +17,30 @@ export class User {
 
   constructor() {
     this.data = {};
-    this.getData();
+    this.tasks = [];
+    this.balance = new Balance(0);
   }
 
-  getData(): void {
+  async getData(): Promise<{ user: UserType; tasks: TaskType[] }> {
     this.data = getLocalData();
     this.tasks = this.data.tasks;
     this.balance = new Balance(this.data.user.balance);
-    this.name = 'TEST NAME';
+    this.name = this.data.user.name;
+    return this.data;
   }
 
   async fetchData(): Promise<void> {
     this.data = await fetchDataFromDb();
-    this.tasks = this.data.Tasks;
+    console.log(this.data);
+    this.tasks = this.data.tasks;
+    this.balance = new Balance(this.data.user.balance);
+    this.name = this.data.user.name;
     saveLocalData(this.data);
+  }
+
+  async syncData(): Promise<void> {
+    const dataString = JSON.stringify({ data: this.data });
+    syncDataToDb(dataString);
   }
 
   getID() {

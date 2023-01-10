@@ -10,14 +10,19 @@ import StatusBar from '../StatusBar';
 import { Task } from 'types';
 import { CardsContext, BalanceContext } from '@/Components/Context';
 import AddTask from '../AddTask';
+import SyncData from '../SyncData';
+import FetchData from '../FetchData';
 
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
   const [balance, setBalance] = useState<Number | undefined>();
 
   useEffect(() => {
-    const tasks = user.tasks;
-    setTasks(tasks);
+    const getData = async () => {
+      const data = await user.getData();
+      setTasks(data.tasks);
+    };
+    getData();
   }, []);
 
   useEffect(() => {
@@ -59,6 +64,8 @@ const Wrapper: React.FC = () => {
                   );
                 })}
               <AddTask />
+              <FetchData />
+              <SyncData />
             </CardsContext.Provider>
           </WithToken>
         </BalanceContext.Provider>
