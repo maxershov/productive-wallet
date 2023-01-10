@@ -4,19 +4,19 @@ import { user } from '@/Classes/User';
 
 import global from '@/global.module.css';
 
-const AddTask: React.FC = () => {
+const FetchData: React.FC = () => {
   const [, updateTasks] = useContext(CardsContext);
 
-  function addTask() {
-    user.createTask();
+  async function fetchData() {
+    await user.fetchData();
     updateTasks();
   }
 
   return (
-    <button className={global.button} onClick={addTask}>
-      +
+    <button className={global.button} onClick={fetchData}>
+      FETCH
     </button>
   );
 };
 
-export default AddTask;
+export default FetchData;
