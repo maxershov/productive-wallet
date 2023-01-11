@@ -1,5 +1,5 @@
+import { Data as DataType, Task as TaskType } from '../../types';
 import { Balance } from './Balance';
-import { Task as TaskType, User as UserType } from '../../types';
 import { getLocalData } from '@/BFF/getLocalData';
 import { fetchDataFromDb } from '@/BFF/fetchDataFromDb';
 import { saveLocalData } from '@/BFF/saveLocalData';
@@ -12,8 +12,7 @@ export class User {
 
   tasks: TaskType[];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
+  data: DataType | Record<string, never>;
 
   ID: number;
 
@@ -23,10 +22,7 @@ export class User {
     this.balance = new Balance(0);
   }
 
-  async getData(): Promise<{
-    user: UserType;
-    tasks: TaskType[];
-  }> {
+  async getData(): Promise<DataType> {
     this.data = getLocalData();
     this.tasks = this.data.tasks;
     this.balance = new Balance(this.data.user.balance);
@@ -79,8 +75,7 @@ export class User {
   updateTask(task: TaskType): void {
     const taskIndex = this.getTaskIndexByID(task.ID);
     this.tasks[taskIndex] = task;
-
-    saveLocalData(this.data);
+    saveLocalData(this.data as DataType);
   }
 
   completeTask(ID: number): void {
@@ -90,7 +85,8 @@ export class User {
     this.deleteTaskByID(ID);
 
     this.balance.add(addToBalance);
-    saveLocalData(this.data);
+    this.data.user.balance = this.balance.getAmount();
+    saveLocalData(this.data as DataType);
   }
 
   completeHabit(ID: number): void {
@@ -98,7 +94,8 @@ export class User {
     const addToBalance = taskToComplete.price;
 
     this.balance.add(addToBalance);
-    saveLocalData(this.data);
+    this.data.user.balance = this.balance.getAmount();
+    saveLocalData(this.data as DataType);
   }
 }
 
