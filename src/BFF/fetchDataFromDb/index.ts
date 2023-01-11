@@ -1,6 +1,7 @@
+import { Data } from 'types';
 import { getCredentials } from '@/BFF/credentials';
 
-export async function fetchDataFromDb() {
+export async function fetchDataFromDb(): Promise<Data> {
   const { api, key } = getCredentials();
   const apiData = `${api}/data`;
   const res = await fetch(apiData, {
