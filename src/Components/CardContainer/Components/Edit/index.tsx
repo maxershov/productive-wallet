@@ -1,7 +1,7 @@
+import React, { useContext } from 'preact/compat';
 import { Task as TaskType } from '../../../../../types';
 import { user } from '@/Classes/User';
 import { CardsContext } from '@/Components/Context';
-import React, { useContext } from 'preact/compat';
 import styles from './edit.module.css';
 
 type PropsTypes = TaskType & { onCloseEdit: () => void };
@@ -17,7 +17,7 @@ const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
     const form = new FormData(target);
 
     const [title, type, price] = form.values() as Iterable<string>;
-    const editedTask = { title, type, price: parseInt(price), ID, userId };
+    const editedTask = { title, type, price: parseInt(price, 10), ID, userId };
 
     user.updateTask(editedTask);
     updateTasks();

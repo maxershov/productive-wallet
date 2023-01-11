@@ -7,8 +7,6 @@ if (process.env.NODE_ENV === 'development') {
   require('preact/debug');
 }
 
-const App: React.FC = () => {
-  return <Wrapper />;
-};
+const App: React.FC = () => <Wrapper />;
 
 export default App;

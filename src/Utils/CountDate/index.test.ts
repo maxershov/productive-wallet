@@ -1,4 +1,4 @@
-import { countDays } from './';
+import { countDays } from '.';
 import { getTimeDiff } from '../GetTimeDiff';
 
 describe('countDays', () => {

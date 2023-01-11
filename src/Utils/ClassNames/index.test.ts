@@ -1,4 +1,4 @@
-import {cn} from './';
+import {cn} from '.';
 
 describe('cn test', () => {
     it('should return two classes', () => {

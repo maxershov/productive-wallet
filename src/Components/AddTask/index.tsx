@@ -13,7 +13,7 @@ const AddTask: React.FC = () => {
   }
 
   return (
-    <button className={global.button} onClick={addTask}>
+    <button type="button" className={global.button} onClick={addTask}>
       +
     </button>
   );

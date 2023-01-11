@@ -1,4 +1,4 @@
-import { getTimeDiff } from './';
+import { getTimeDiff } from '.';
 
 describe('countDays', () => {
   it('should work', () => {
