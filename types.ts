@@ -1,10 +1,10 @@
 export type Task = {
-  date?: string;
   ID: number;
   type: string;
   userId: number;
   title: string;
   price: number;
+  date?: string;
 };
 
 export type User = {
