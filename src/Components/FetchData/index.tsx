@@ -13,7 +13,7 @@ const FetchData: React.FC = () => {
   }
 
   return (
-    <button className={global.button} onClick={fetchData}>
+    <button type="button" className={global.button} onClick={fetchData}>
       FETCH
     </button>
   );

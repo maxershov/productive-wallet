@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useContext } from 'preact/compat';
+import { Task } from 'types';
 import { BalanceContext, CardsContext } from '@/Components/Context';
 import { user } from '@/Classes/User';
-import { Task } from 'types';
 import { TASK_TYPE } from '@/enums';
 
 import Card from './Components/Card';
@@ -13,6 +13,7 @@ import styles from './card_container.module.css';
 const CardContainer: React.FC<Task> = (props: Task) => {
   const { ID, title, type, price, date, userId } = props;
 
+  // eslint-disable-next-line no-console
   console.log(`card rendered ${ID}`);
 
   const [, updateBalance] = useContext(BalanceContext);

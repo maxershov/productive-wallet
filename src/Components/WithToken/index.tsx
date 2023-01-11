@@ -7,10 +7,10 @@ import styles from './withToken.module.css';
 import global from '@/global.module.css';
 
 type Props = {
-  children: VNode<any>;
+  children: VNode<unknown>;
 };
 
-const withToken = ({ children }: Props) => {
+const WithToken: React.FC = ({ children }: Props) => {
   const [tokenExist, setTokenExist] = useState(false);
 
   useEffect(() => {
@@ -34,12 +34,12 @@ const withToken = ({ children }: Props) => {
   ) : (
     <form onSubmit={handleTokensSave}>
       <label className={cn([global.blink, styles.label])}>API</label>
-      <input value={''} name="api" required />
+      <input value="" name="api" required />
       <label className={cn([global.blink, styles.label])}>KEY</label>
-      <input value={''} name="key" required />
+      <input value="" name="key" required />
       <button type="submit">Save</button>
     </form>
   );
 };
 
-export default withToken;
+export default WithToken;

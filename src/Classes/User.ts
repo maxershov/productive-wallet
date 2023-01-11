@@ -4,6 +4,7 @@ import { getLocalData } from '@/BFF/getLocalData';
 import { fetchDataFromDb } from '@/BFF/fetchDataFromDb';
 import { saveLocalData } from '@/BFF/saveLocalData';
 import { syncDataToDb } from '@/BFF/syncDataToDb';
+
 export class User {
   name: string;
 
@@ -11,6 +12,7 @@ export class User {
 
   tasks: TaskType[];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
 
   ID: number;
@@ -34,7 +36,6 @@ export class User {
 
   async fetchData(): Promise<void> {
     this.data = await fetchDataFromDb();
-    console.log(this.data);
     this.tasks = this.data.tasks;
     this.balance = new Balance(this.data.user.balance);
     this.name = this.data.user.name;
@@ -47,9 +48,7 @@ export class User {
   }
 
   getID() {
-    const IDs = this.tasks.map((task) => {
-      return task.ID;
-    });
+    const IDs = this.tasks.map((task) => task.ID);
     return Math.max(...IDs) + 1;
   }
 

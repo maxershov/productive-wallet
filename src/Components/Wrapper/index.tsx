@@ -1,4 +1,6 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useEffect, useState } from 'preact/compat';
+import { Task } from 'types';
 import { cn } from '@/Utils/ClassNames';
 import { user } from '@/Classes/User';
 import styles from './wrapper.module.css';
@@ -7,7 +9,6 @@ import global from '@/global.module.css';
 import WithToken from '../WithToken';
 import CardContainer from '../CardContainer';
 import StatusBar from '../StatusBar';
-import { Task } from 'types';
 import { CardsContext, BalanceContext } from '@/Components/Context';
 import AddTask from '../AddTask';
 import SyncData from '../SyncData';
@@ -17,7 +18,7 @@ import { filterTasks } from '@/Utils/FilterTasks';
 
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
-  const [balance, setBalance] = useState<Number | undefined>();
+  const [balance, setBalance] = useState<number | undefined>();
   const [showTasks, setShowTasks] = useState(true);
 
   function toggleHabits() {
@@ -33,7 +34,7 @@ const Wrapper: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const balance = user.balance;
+    const { balance } = user;
     setBalance(balance.getAmount());
   }, [balance]);
 
@@ -73,7 +74,11 @@ const Wrapper: React.FC = () => {
               <AddTask />
               <FetchData />
               <SyncData />
-              <button className={global.button} onClick={toggleHabits}>
+              <button
+                type="button"
+                className={global.button}
+                onClick={toggleHabits}
+              >
                 {showTasks ? 'HABITS' : 'TASKS'}
               </button>
             </CardsContext.Provider>
