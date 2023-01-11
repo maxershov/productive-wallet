@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 const ts = {
   test: /\.(ts)x?$/,
@@ -70,6 +72,7 @@ module.exports = {
     rules: [ts, js, css, imgs, etc],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
       title: "Journal",
