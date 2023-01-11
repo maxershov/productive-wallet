@@ -18,17 +18,17 @@
 }
 
 .title {
-  font-size: 12px;
+  font-size: 14px;
   grid-area: title;
 }
 
 .type {
-  font-size: 10px;
+  font-size: 12px;
   grid-area: type;
 }
 
 .price {
-  font-size: 10px;
+  font-size: 12px;
   grid-area: price;
   font-family: monospace;
 }
@@ -37,7 +37,7 @@
 .cancel {
   background: var(--text-color);
   font-weight: bold;
-  font-size: 10px;
+  font-size: 12px;
   color: black;
   border: 1px solid black;
   cursor: pointer;
