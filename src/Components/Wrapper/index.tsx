@@ -13,9 +13,16 @@ import AddTask from '../AddTask';
 import SyncData from '../SyncData';
 import FetchData from '../FetchData';
 
+import { filterTasks } from '@/Utils/FilterTasks';
+
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
   const [balance, setBalance] = useState<Number | undefined>();
+  const [showTasks, setShowTasks] = useState(true);
+
+  function toggleHabits() {
+    setShowTasks(!showTasks);
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -49,7 +56,7 @@ const Wrapper: React.FC = () => {
           <WithToken>
             <CardsContext.Provider value={[tasks, updateTasks]}>
               {tasks &&
-                tasks.map((task) => {
+                filterTasks(tasks, showTasks).map((task) => {
                   const { ID, userId, title, type, price, date } = task;
                   return (
                     <CardContainer
@@ -66,6 +73,9 @@ const Wrapper: React.FC = () => {
               <AddTask />
               <FetchData />
               <SyncData />
+              <button className={global.button} onClick={toggleHabits}>
+                {showTasks ? 'HABITS' : 'TASKS'}
+              </button>
             </CardsContext.Provider>
           </WithToken>
         </BalanceContext.Provider>

@@ -19,6 +19,7 @@
   background: none;
   border: solid 1px var(--text-color);
   cursor: pointer;
+  padding: 0 15px;
 
   &:hover {
     opacity: 0.6;

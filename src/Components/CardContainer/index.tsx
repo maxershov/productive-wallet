@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'preact/compat';
 import { BalanceContext, CardsContext } from '@/Components/Context';
 import { user } from '@/Classes/User';
 import { Task } from 'types';
+import { TASK_TYPE } from '@/enums';
 
 import Card from './Components/Card';
 import Edit from './Components/Edit';
@@ -28,7 +29,12 @@ const CardContainer: React.FC<Task> = (props: Task) => {
   }
 
   function onComplete(ID: number) {
-    user.completeTask(ID);
+    if (type === TASK_TYPE.HABIT) {
+      user.completeHabit(ID);
+    } else {
+      user.completeTask(ID);
+    }
+
     updateBalance();
     updateTasks();
   }

@@ -55,7 +55,6 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "main.js",
     chunkFilename: "[name].bundle.js",
-    publicPath: "/",
   },
   devServer: {
     port: 6802,

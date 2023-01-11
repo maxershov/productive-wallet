@@ -21,7 +21,10 @@ export class User {
     this.balance = new Balance(0);
   }
 
-  async getData(): Promise<{ user: UserType; tasks: TaskType[] }> {
+  async getData(): Promise<{
+    user: UserType;
+    tasks: TaskType[];
+  }> {
     this.data = getLocalData();
     this.tasks = this.data.tasks;
     this.balance = new Balance(this.data.user.balance);
@@ -86,6 +89,14 @@ export class User {
     const addToBalance = taskToComplete.price;
 
     this.deleteTaskByID(ID);
+
+    this.balance.add(addToBalance);
+    saveLocalData(this.data);
+  }
+
+  completeHabit(ID: number): void {
+    const taskToComplete = this.getTaskByID(ID);
+    const addToBalance = taskToComplete.price;
 
     this.balance.add(addToBalance);
     saveLocalData(this.data);
