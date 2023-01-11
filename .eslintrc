@@ -1,9 +1,5 @@
 {
-  "plugins": [
-    "prettier",
-    "@typescript-eslint",
-    "jest"
-  ],
+  "plugins": ["prettier", "@typescript-eslint", "jest"],
   "extends": [
     "airbnb",
     "airbnb-typescript",
@@ -12,10 +8,13 @@
     "plugin:jest/recommended",
     "prettier"
   ],
+  "settings": {
+    "react": {
+      "version": "16.0"
+    }
+  },
   // fix Parsing error: Cannot read file '__dirname\tsconfig.json' in webpack.config
-  "ignorePatterns": [
-    "/*.*"
-  ],
+  "ignorePatterns": ["/*.*"],
   "env": {
     "node": true,
     "browser": true,
@@ -26,22 +25,24 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "jsx-quotes": [
-      1,
-      "prefer-double"
-    ],
-    "no-plusplus":"off",
-    "max-classes-per-file":"off",
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
+    "import/no-cycle": 0,
+    "import/no-named-as-default": 0,
+    "import/extensions": 0,
+    "jsx-quotes": [1, "prefer-double"],
     "jsx-a11y/label-has-associated-control": "off",
+    "max-classes-per-file": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "no-plusplus": "off",
+    "no-param-reassign": 0,
     "react/prop-types": 0,
     "react/jsx-one-expression-per-line": "off",
     "react/destructuring-assignment": "off",
-    "import/no-cycle": 0,
-    "import/no-named-as-default": 0,
-    "import/extensions": "never",
-    "no-param-reassign": 0,
-    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }]
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": "arrow-function" }
+    ]
   }
 }
