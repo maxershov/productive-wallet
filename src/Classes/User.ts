@@ -1,5 +1,9 @@
 import { Balance } from './Balance';
-import { Task as TaskType, User as UserType } from '../../types';
+import {
+  Task as TaskType,
+  User as UserType,
+  Data as DataType,
+} from '../../types';
 import { getLocalData } from '@/BFF/getLocalData';
 import { fetchDataFromDb } from '@/BFF/fetchDataFromDb';
 import { saveLocalData } from '@/BFF/saveLocalData';
@@ -12,13 +16,11 @@ export class User {
 
   tasks: TaskType[];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
+  data: DataType;
 
   ID: number;
 
   constructor() {
-    this.data = {};
     this.tasks = [];
     this.balance = new Balance(0);
   }
@@ -54,7 +56,7 @@ export class User {
 
   createTask() {
     const newTask = {
-      title: 'NEW TASK',
+      title: '',
       type: '',
       price: 0,
       ID: this.getID(),
