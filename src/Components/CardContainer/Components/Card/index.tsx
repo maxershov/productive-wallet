@@ -46,7 +46,7 @@ const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
         type="button"
         className={styles.button}
       >
-        <span className={global.blink}>OK</span>
+        <span className={global.blink}>&#10004;</span>
       </button>
     </div>
   );

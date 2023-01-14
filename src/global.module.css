@@ -25,3 +25,15 @@
     opacity: 0.6;
   }
 }
+
+.iconBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 15px;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}

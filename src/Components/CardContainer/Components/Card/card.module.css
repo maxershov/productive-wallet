@@ -37,11 +37,11 @@
 
 .button {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 20px;
   width: 100px;
   color: #1bff80;
   background: none;
-  border: solid 1px var(--text-color);
+  border: none;
   cursor: pointer;
   border-radius: 2px;
   margin: 2px 0;
