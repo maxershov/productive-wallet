@@ -5,30 +5,37 @@
   align-items: start;
   grid-template-areas:
     'title title title'
-    'type none edit'
+    'type none button'
     'price date button';
 }
 
-.title, .type, .price, .date {
+.title,
+.type,
+.price,
+.date {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
 }
 
 .title {
   grid-area: title;
 }
 
-.type {  
+.type {
   grid-area: type;
 }
 
-.price, .date {
+.price,
+.date {
   grid-area: price;
   font-family: monospace;
 }
 
-.button,
-.edit {
+.button {
   font-weight: bold;
   font-size: 12px;
   width: 100px;
@@ -46,10 +53,6 @@
 
 .button {
   grid-area: button;
-}
-
-.edit {
-  grid-area: edit;
 }
 
 .date {
