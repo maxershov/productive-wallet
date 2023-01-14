@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'preact/compat';
 import { Task } from 'types';
 import { cn } from '@/Utils/ClassNames';
@@ -21,25 +19,34 @@ const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
 
   return (
     <div className={styles.grid}>
-      <span className={cn([global.blink, styles.title])} onClick={onEdit}>
-        {title}
-      </span>
-      <span className={cn([global.blink, styles.type])} onClick={onEdit}>
-        {type}
-      </span>
-      <span className={cn([global.blink, styles.price])} onClick={onEdit}>
-        {price}
-      </span>
-      <span className={cn([global.blink, styles.date])}>{timeLeft}</span>
-      <button onClick={onEdit} type="button" className={styles.edit}>
-        <span className={global.blink}>EDIT</span>
+      <button
+        className={cn([global.blink, styles.title])}
+        type="button"
+        onClick={onEdit}
+      >
+        <span>{title}</span>
       </button>
+      <button
+        className={cn([global.blink, styles.type])}
+        type="button"
+        onClick={onEdit}
+      >
+        <span>{type}</span>
+      </button>
+      <button
+        className={cn([global.blink, styles.price])}
+        type="button"
+        onClick={onEdit}
+      >
+        <span>{price}</span>
+      </button>
+      <span className={cn([global.blink, styles.date])}>{timeLeft}</span>
       <button
         onClick={() => onComplete(ID)}
         type="button"
         className={styles.button}
       >
-        <span className={global.blink}>OK</span>
+        <span className={global.blink}>&#10004;</span>
       </button>
     </div>
   );

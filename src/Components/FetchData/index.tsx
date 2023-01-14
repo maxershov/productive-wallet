@@ -13,8 +13,8 @@ const FetchData: React.FC = () => {
   }
 
   return (
-    <button type="button" className={global.button} onClick={fetchData}>
-      FETCH
+    <button type="button" className={global.iconBtn} onClick={fetchData}>
+      &#8681;
     </button>
   );
 };

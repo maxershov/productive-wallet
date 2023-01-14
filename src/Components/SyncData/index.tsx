@@ -9,8 +9,8 @@ const SyncData: React.FC = () => {
   }
 
   return (
-    <button type="button" className={global.button} onClick={syncData}>
-      SYNC
+    <button type="button" className={global.iconBtn} onClick={syncData}>
+      &#8682;
     </button>
   );
 };

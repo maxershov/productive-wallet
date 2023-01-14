@@ -11,8 +11,6 @@ import CardContainer from '../CardContainer';
 import StatusBar from '../StatusBar';
 import { CardsContext, BalanceContext } from '@/Components/Context';
 import AddTask from '../AddTask';
-import SyncData from '../SyncData';
-import FetchData from '../FetchData';
 
 import { filterTasks } from '@/Utils/FilterTasks';
 
@@ -52,10 +50,10 @@ const Wrapper: React.FC = () => {
       <div className={styles.lines} />
       <div className={styles.container}>
         <BalanceContext.Provider value={[balance, updateBalance]}>
-          <StatusBar />
-          <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
-          <WithToken>
-            <CardsContext.Provider value={[tasks, updateTasks]}>
+          <CardsContext.Provider value={[tasks, updateTasks]}>
+            <StatusBar />
+            <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
+            <WithToken>
               {tasks &&
                 filterTasks(tasks, showTasks).map((task) => {
                   const { ID, userId, title, type, price, date } = task;
@@ -72,8 +70,6 @@ const Wrapper: React.FC = () => {
                   );
                 })}
               <AddTask />
-              <FetchData />
-              <SyncData />
               <button
                 type="button"
                 className={global.button}
@@ -81,8 +77,8 @@ const Wrapper: React.FC = () => {
               >
                 {showTasks ? 'HABITS' : 'TASKS'}
               </button>
-            </CardsContext.Provider>
-          </WithToken>
+            </WithToken>
+          </CardsContext.Provider>
         </BalanceContext.Provider>
       </div>
     </div>
