@@ -1,3 +1,5 @@
+import { user } from './User';
+
 export class Balance {
   amount: number;
 
@@ -11,9 +13,11 @@ export class Balance {
 
   add(value: number): void {
     this.amount += value;
+    user.data.user.balance = this.amount;
   }
 
   withdraw(value: number): void {
     this.amount -= value;
+    user.data.user.balance = this.amount;
   }
 }
