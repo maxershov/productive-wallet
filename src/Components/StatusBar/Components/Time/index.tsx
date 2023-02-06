@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'preact/compat';
-import { cn } from '@/Utils/ClassNames';
 import styles from './time.module.css';
-import global from '@/global.module.css';
 
 const Time: React.FC = () => {
   const [today, setToday] = useState(new Date());

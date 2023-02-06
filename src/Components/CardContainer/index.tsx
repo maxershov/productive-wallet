@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'preact/compat';
 import { Task } from 'types';
 import { BalanceContext, CardsContext } from '@/Components/Context';
 import { user } from '@/Classes/User';
-import { TASK_TYPE } from '@/enums';
+import { FocusValues, TASK_TYPE } from '@/enums';
 
 import Card from './Components/Card';
 import Edit from './Components/Edit';
@@ -20,13 +20,15 @@ const CardContainer: React.FC<Task> = (props: Task) => {
   const [, updateTasks] = useContext(CardsContext);
 
   const [isEdit, setIsEdit] = useState(false);
+  const [focus, setFocus] = useState(null);
 
   function onCloseEdit() {
     setIsEdit(false);
   }
 
-  function onEdit() {
+  function onEdit(focus: FocusValues) {
     setIsEdit(true);
+    setFocus(focus);
   }
 
   function onComplete(ID: number) {
@@ -51,6 +53,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
           date={date}
           price={price}
           onCloseEdit={onCloseEdit}
+          focusInput={focus}
         />
       ) : (
         <Card
