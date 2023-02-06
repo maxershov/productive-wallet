@@ -1,3 +1,4 @@
 .balance {
     font-family: monospace;
+    color: var(--text-color);
 }

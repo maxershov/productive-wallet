@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useEffect, useState } from 'preact/compat';
 import { Task } from 'types';
-import { cn } from '@/Utils/ClassNames';
 import { user } from '@/Classes/User';
 import styles from './wrapper.module.css';
 import global from '@/global.module.css';
@@ -52,7 +51,7 @@ const Wrapper: React.FC = () => {
         <BalanceContext.Provider value={[balance, updateBalance]}>
           <CardsContext.Provider value={[tasks, updateTasks]}>
             <StatusBar />
-            <h3 className={cn([global.blink, styles.title])}>JOURNAL</h3>
+            <h3 className={styles.title}>JOURNAL</h3>
             <WithToken>
               {tasks &&
                 filterTasks(tasks, showTasks).map((task) => {

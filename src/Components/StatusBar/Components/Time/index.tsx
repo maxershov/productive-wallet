@@ -22,7 +22,7 @@ const Time: React.FC = () => {
     return () => clearInterval(interval);
   }, [today]);
 
-  return <div className={cn([global.blink, styles.time])}>{date}</div>;
+  return <div className={styles.time}>{date}</div>;
 };
 
 export default Time;
