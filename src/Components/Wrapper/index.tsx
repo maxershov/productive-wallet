@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useCallback, useEffect, useState } from 'preact/compat';
 import { Task } from 'types';
 import { user } from '@/Classes/User';
@@ -9,8 +8,12 @@ import WithToken from '../../HOC/WithToken';
 import CardContainer from '../CardContainer';
 import StatusBar from '../StatusBar';
 
-import { CardsContext } from '@/Context/CardsContext';
-import { BalanceContext } from '@/Context/BalanceContext';
+import {
+  CardsContext,
+  CardsActions,
+  BalanceContext,
+  BalanceActions,
+} from '@/Context';
 
 import AddTask from '../AddTask';
 
@@ -45,48 +48,52 @@ const Wrapper: React.FC = () => {
     setBalance(balance.getAmount());
   }, [balance]);
 
-  const updateTasks = () => {
+  const updateTasks = useCallback(() => {
     setTasks([...user.tasks]);
-  };
+  }, []);
 
-  const updateBalance = () => {
+  const updateBalance = useCallback(() => {
     setBalance(user.balance.getAmount());
-  };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.lines} />
       <div className={styles.container}>
-        <BalanceContext.Provider value={[balance, updateBalance]}>
-          <CardsContext.Provider value={[tasks, updateTasks]}>
-            <StatusBar />
-            <h3 className={styles.title}>JOURNAL</h3>
-            <WithToken>
-              {tasks &&
-                filterTasks(tasks, showTasks).map((task) => {
-                  const { ID, userId, title, type, price, date } = task;
-                  return (
-                    <CardContainer
-                      key={ID}
-                      ID={ID}
-                      title={title}
-                      type={type}
-                      price={price}
-                      date={date}
-                      userId={userId}
-                    />
-                  );
-                })}
-              <AddTask />
-              <button
-                type="button"
-                className={global.button}
-                onClick={toggleHabits}
-              >
-                {showTasks ? 'HABITS' : 'TASKS'}
-              </button>
-            </WithToken>
-          </CardsContext.Provider>
+        <BalanceContext.Provider value={balance}>
+          <BalanceActions.Provider value={updateBalance}>
+            <CardsContext.Provider value={tasks}>
+              <CardsActions.Provider value={updateTasks}>
+                <StatusBar />
+                <h3 className={styles.title}>JOURNAL</h3>
+                <WithToken>
+                  {tasks &&
+                    filterTasks(tasks, showTasks).map((task) => {
+                      const { ID, userId, title, type, price, date } = task;
+                      return (
+                        <CardContainer
+                          key={ID}
+                          ID={ID}
+                          title={title}
+                          type={type}
+                          price={price}
+                          date={date}
+                          userId={userId}
+                        />
+                      );
+                    })}
+                  <AddTask />
+                  <button
+                    type="button"
+                    className={global.button}
+                    onClick={toggleHabits}
+                  >
+                    {showTasks ? 'HABITS' : 'TASKS'}
+                  </button>
+                </WithToken>
+              </CardsActions.Provider>
+            </CardsContext.Provider>
+          </BalanceActions.Provider>
         </BalanceContext.Provider>
       </div>
     </div>

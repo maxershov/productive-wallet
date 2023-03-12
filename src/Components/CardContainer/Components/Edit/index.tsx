@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useRef } from 'preact/compat';
 import { Task as TaskType } from '../../../../../types';
 import { user } from '@/Classes/User';
-import { CardsContext } from '@/Context/CardsContext';
+
+import { CardsActions } from '@/Context';
+
 import styles from './edit.module.css';
+
 import { FocusValues } from '@/enums';
 
 type PropsTypes = TaskType & {
@@ -12,7 +15,7 @@ type PropsTypes = TaskType & {
 
 const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
   const { userId, ID, title, type, price, onCloseEdit, focusInput } = props;
-  const [, updateTasks] = useContext(CardsContext);
+  const updateTasks = useContext(CardsActions);
   const formRef = useRef(null);
 
   useEffect(() => {
