@@ -3,10 +3,11 @@
   grid-template-rows: auto;
   justify-content: space-between;
   align-items: start;
+  position: relative;
   grid-template-areas:
     'title title title'
-    'type none button'
-    'price date button';
+    'type type .'
+    'price date .';
 }
 
 .title,
@@ -20,6 +21,10 @@
   background: none;
   cursor: pointer;
   text-align: left;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
 .title {
@@ -46,14 +51,13 @@
   cursor: pointer;
   border-radius: 2px;
   margin: 2px 0;
+  position: absolute;
+  right: -20px;
+  top: 15px;
 
   &:hover {
     opacity: 0.6;
   }
-}
-
-.button {
-  grid-area: button;
 }
 
 .date {
