@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'preact/compat';
 import { Task } from 'types';
 
 import { CardsActions } from '@/Context';
-import { BalanceActions } from '@/Context/BalanceActions';
 
 import { user } from '@/Classes/User';
 import { FocusValues, TASK_TYPE } from '@/enums';
@@ -18,7 +17,6 @@ const CardContainer: React.FC<Task> = (props: Task) => {
   // eslint-disable-next-line no-console
   console.log(`card rendered ${ID}`);
 
-  const updateBalance = useContext(BalanceActions);
   const updateTasks = useContext(CardsActions);
 
   const [isEdit, setIsEdit] = useState(false);
@@ -40,7 +38,6 @@ const CardContainer: React.FC<Task> = (props: Task) => {
       user.completeTask(ID);
     }
 
-    updateBalance();
     updateTasks();
   };
 
