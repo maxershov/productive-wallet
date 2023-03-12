@@ -1,7 +1,8 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { useState, useContext } from 'preact/compat';
 import { Task } from 'types';
-import { BalanceContext, CardsContext } from '@/Components/Context';
+
+import { CardsActions } from '@/Context';
+
 import { user } from '@/Classes/User';
 import { FocusValues, TASK_TYPE } from '@/enums';
 
@@ -16,31 +17,29 @@ const CardContainer: React.FC<Task> = (props: Task) => {
   // eslint-disable-next-line no-console
   console.log(`card rendered ${ID}`);
 
-  const [, updateBalance] = useContext(BalanceContext);
-  const [, updateTasks] = useContext(CardsContext);
+  const updateTasks = useContext(CardsActions);
 
   const [isEdit, setIsEdit] = useState(false);
   const [focus, setFocus] = useState(null);
 
-  function onCloseEdit() {
+  const onCloseEdit = () => {
     setIsEdit(false);
-  }
+  };
 
-  function onEdit(focus: FocusValues) {
+  const onEdit = (focus: FocusValues) => {
     setIsEdit(true);
     setFocus(focus);
-  }
+  };
 
-  function onComplete(ID: number) {
+  const onComplete = (ID: number) => {
     if (type === TASK_TYPE.HABIT) {
       user.completeHabit(ID);
     } else {
       user.completeTask(ID);
     }
 
-    updateBalance();
     updateTasks();
-  }
+  };
 
   return (
     <div className={styles.card}>

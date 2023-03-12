@@ -1,4 +1,3 @@
-const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -53,7 +52,7 @@ const etc = {
 
 module.exports = {
   context: path.resolve(__dirname),
-  entry: ["@babel/polyfill", "./src/index.js"],
+  entry: ["@babel/polyfill", "./src/index.jsx"],
   mode: "production",
   output: {
     path: path.join(__dirname, "dist"),

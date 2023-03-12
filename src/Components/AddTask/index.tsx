@@ -1,11 +1,11 @@
 import React, { useContext } from 'preact/compat';
-import { CardsContext } from '@/Components/Context';
+import { CardsActions } from '@/Context';
 import { user } from '@/Classes/User';
 
 import global from '@/global.module.css';
 
 const AddTask: React.FC = () => {
-  const [, updateTasks] = useContext(CardsContext);
+  const updateTasks = useContext(CardsActions);
 
   function addTask() {
     user.createTask();
