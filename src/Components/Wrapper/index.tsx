@@ -34,11 +34,10 @@ const Wrapper: React.FC = () => {
   }, [isSwiped, toggleHabits]);
 
   useEffect(() => {
-    const getData = async () => {
+    (async () => {
       const data = await user.getData();
       setTasks(data.tasks);
-    };
-    getData();
+    })();
   }, []);
 
   useEffect(() => {
@@ -47,7 +46,6 @@ const Wrapper: React.FC = () => {
   }, [balance]);
 
   const updateTasks = () => {
-    // TODO fix rerenders in card
     setTasks([...user.tasks]);
   };
 
