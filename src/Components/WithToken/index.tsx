@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'preact/compat';
 import { VNode } from 'preact';
 import { getCredentials, setCredentials } from '@/BFF/credentials';
-import { cn } from '@/Utils/ClassNames';
 
 import styles from './withToken.module.css';
-import global from '@/global.module.css';
 
 type Props = {
   children: VNode<unknown>;
@@ -33,9 +31,9 @@ const WithToken: React.FC = ({ children }: Props) => {
     children
   ) : (
     <form onSubmit={handleTokensSave}>
-      <label className={cn([global.blink, styles.label])}>API</label>
+      <label className={styles.label}>API</label>
       <input value="" name="api" required />
-      <label className={cn([global.blink, styles.label])}>KEY</label>
+      <label className={styles.label}>KEY</label>
       <input value="" name="key" required />
       <button type="submit">Save</button>
     </form>

@@ -1,12 +1,11 @@
 import React from 'preact/compat';
 import { Task } from 'types';
-import { cn } from '@/Utils/ClassNames';
 import styles from './card.module.css';
-import global from '@/global.module.css';
 import { dateWrapper } from '@/Utils/DateWrapper';
+import { FOCUS, FocusValues } from '@/enums';
 
 type PropsTypes = Task & {
-  onEdit: () => void;
+  onEdit: (focus: FocusValues) => void;
   onComplete: (ID: number) => void;
 };
 
@@ -20,33 +19,33 @@ const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
   return (
     <div className={styles.grid}>
       <button
-        className={cn([global.blink, styles.title])}
+        className={styles.title}
         type="button"
-        onClick={onEdit}
+        onClick={() => onEdit(FOCUS.TITLE)}
       >
         <span>{title}</span>
       </button>
       <button
-        className={cn([global.blink, styles.type])}
+        className={styles.type}
         type="button"
-        onClick={onEdit}
+        onClick={() => onEdit(FOCUS.TYPE)}
       >
         <span>{type}</span>
       </button>
       <button
-        className={cn([global.blink, styles.price])}
+        className={styles.price}
         type="button"
-        onClick={onEdit}
+        onClick={() => onEdit(FOCUS.PRICE)}
       >
         <span>{price}</span>
       </button>
-      <span className={cn([global.blink, styles.date])}>{timeLeft}</span>
+      <span className={styles.date}>{timeLeft}</span>
       <button
         onClick={() => onComplete(ID)}
         type="button"
         className={styles.button}
       >
-        <span className={global.blink}>&#10004;</span>
+        <span>&#10004;</span>
       </button>
     </div>
   );

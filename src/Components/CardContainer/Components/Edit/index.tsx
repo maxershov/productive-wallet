@@ -1,15 +1,23 @@
-import React, { useContext } from 'preact/compat';
+import React, { useContext, useEffect, useRef } from 'preact/compat';
 import { Task as TaskType } from '../../../../../types';
 import { user } from '@/Classes/User';
 import { CardsContext } from '@/Components/Context';
 import styles from './edit.module.css';
+import { FocusValues } from '@/enums';
 
-type PropsTypes = TaskType & { onCloseEdit: () => void };
+type PropsTypes = TaskType & {
+  onCloseEdit: () => void;
+  focusInput: FocusValues;
+};
 
 const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
-  const { userId, ID, title, type, price, onCloseEdit } = props;
-
+  const { userId, ID, title, type, price, onCloseEdit, focusInput } = props;
   const [, updateTasks] = useContext(CardsContext);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    formRef.current.elements[focusInput].focus();
+  }, [focusInput]);
 
   function updateTask(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,7 +33,12 @@ const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
   }
 
   return (
-    <form className={styles.edit} onSubmit={updateTask} autoComplete="off">
+    <form
+      className={styles.edit}
+      ref={formRef}
+      onSubmit={updateTask}
+      autoComplete="off"
+    >
       <input className={styles.title} value={title} name="title" />
       <input className={styles.type} value={type} name="type" />
       <input
