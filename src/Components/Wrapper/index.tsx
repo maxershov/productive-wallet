@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useState } from 'preact/compat';
 import { Task } from 'types';
 import { user } from '@/Classes/User';
 import styles from './wrapper.module.css';
-import global from '@/global.module.css';
 
 import WithToken from '../../HOC/WithToken';
-import CardContainer from '../CardContainer';
+import Tasks from '../Tasks';
+import TypeSwitch from '../TypeSwitch';
 import StatusBar from '../StatusBar';
 
 import {
@@ -17,7 +17,6 @@ import {
 
 import AddTask from '../AddTask';
 
-import { filterTasks } from '@/Utils/FilterTasks';
 import { useSwipe } from '@/Hooks/useSwipe';
 
 const Wrapper: React.FC = () => {
@@ -67,29 +66,12 @@ const Wrapper: React.FC = () => {
                 <StatusBar />
                 <h3 className={styles.title}>JOURNAL</h3>
                 <WithToken>
-                  {tasks &&
-                    filterTasks(tasks, showTasks).map((task) => {
-                      const { ID, userId, title, type, price, date } = task;
-                      return (
-                        <CardContainer
-                          key={ID}
-                          ID={ID}
-                          title={title}
-                          type={type}
-                          price={price}
-                          date={date}
-                          userId={userId}
-                        />
-                      );
-                    })}
+                  <Tasks showTasks={showTasks} />
                   <AddTask />
-                  <button
-                    type="button"
-                    className={global.button}
-                    onClick={toggleHabits}
-                  >
-                    {showTasks ? 'HABITS' : 'TASKS'}
-                  </button>
+                  <TypeSwitch
+                    showTasks={showTasks}
+                    toggleHabits={toggleHabits}
+                  />
                 </WithToken>
               </CardsActions.Provider>
             </CardsContext.Provider>
