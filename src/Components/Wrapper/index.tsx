@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React, { useEffect, useState } from 'preact/compat';
+import React, { useCallback, useEffect, useState } from 'preact/compat';
 import { Task } from 'types';
 import { user } from '@/Classes/User';
 import styles from './wrapper.module.css';
@@ -12,15 +12,23 @@ import { CardsContext, BalanceContext } from '@/Components/Context';
 import AddTask from '../AddTask';
 
 import { filterTasks } from '@/Utils/FilterTasks';
+import { useSwipe } from '@/Hooks/useSwipe';
 
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
   const [balance, setBalance] = useState<number | undefined>();
   const [showTasks, setShowTasks] = useState(true);
+  const isSwiped = useSwipe();
 
-  function toggleHabits() {
-    setShowTasks(!showTasks);
-  }
+  const toggleHabits = useCallback(() => {
+    setShowTasks((showTasks) => !showTasks);
+  }, []);
+
+  useEffect(() => {
+    if (isSwiped) {
+      toggleHabits();
+    }
+  }, [isSwiped, toggleHabits]);
 
   useEffect(() => {
     const getData = async () => {
