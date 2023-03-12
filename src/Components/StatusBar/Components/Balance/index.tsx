@@ -1,5 +1,5 @@
 import React, { useContext } from 'preact/compat';
-import { BalanceContext } from '@/Components/Context';
+import { BalanceContext } from '@/Context/BalanceContext';
 import styles from './balance.module.css';
 
 const Balance: React.FC = () => {

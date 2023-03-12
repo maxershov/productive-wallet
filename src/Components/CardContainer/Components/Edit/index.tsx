@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'preact/compat';
 import { Task as TaskType } from '../../../../../types';
 import { user } from '@/Classes/User';
-import { CardsContext } from '@/Components/Context';
+import { CardsContext } from '@/Context/CardsContext';
 import styles from './edit.module.css';
 import { FocusValues } from '@/enums';
 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'preact/compat';
-import { CardsContext } from '@/Components/Context';
+import { CardsContext } from '@/Context/CardsContext';
 import { user } from '@/Classes/User';
 
 import global from '@/global.module.css';

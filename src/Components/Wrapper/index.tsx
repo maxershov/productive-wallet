@@ -5,10 +5,13 @@ import { user } from '@/Classes/User';
 import styles from './wrapper.module.css';
 import global from '@/global.module.css';
 
-import WithToken from '../WithToken';
+import WithToken from '../../HOC/WithToken';
 import CardContainer from '../CardContainer';
 import StatusBar from '../StatusBar';
-import { CardsContext, BalanceContext } from '@/Components/Context';
+
+import { CardsContext } from '@/Context/CardsContext';
+import { BalanceContext } from '@/Context/BalanceContext';
+
 import AddTask from '../AddTask';
 
 import { filterTasks } from '@/Utils/FilterTasks';

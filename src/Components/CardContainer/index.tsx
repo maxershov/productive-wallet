@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useContext } from 'preact/compat';
 import { Task } from 'types';
-import { BalanceContext, CardsContext } from '@/Components/Context';
+
+import { CardsContext } from '@/Context/CardsContext';
+import { BalanceContext } from '@/Context/BalanceContext';
+
 import { user } from '@/Classes/User';
 import { FocusValues, TASK_TYPE } from '@/enums';
 
