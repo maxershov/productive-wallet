@@ -1,4 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'preact/compat';
+import { isThreshold } from '@/Utils/IsThreshold';
+
+const swipeThresholdY = 30;
+const swipeThresholdX = 50;
 
 export function useSwipe() {
   const [isSwiped, setIsSwiped] = useState(false);
@@ -10,13 +14,11 @@ export function useSwipe() {
   const touchendY = useRef(0);
 
   const onSwipe = () => {
-    if (touchstartY.current === touchendY.current) {
-      if (
-        touchendX.current < touchstartX.current ||
-        touchendX.current > touchstartX.current
-      ) {
-        setIsSwiped(true);
-      }
+    if (
+      isThreshold(touchstartY.current, touchendY.current, swipeThresholdY) &&
+      !isThreshold(touchstartX.current, touchendX.current, swipeThresholdX)
+    ) {
+      setIsSwiped(true);
     }
   };
 
