@@ -21,7 +21,7 @@ import { useSwipe } from '@/Hooks/useSwipe';
 
 const Wrapper: React.FC = () => {
   const [tasks, setTasks] = useState<Task[] | undefined>();
-  const [balance, setBalance] = useState<number | undefined>();
+  const [balance, setBalance] = useState<number>(0);
   const [showTasks, setShowTasks] = useState(true);
   const isSwiped = useSwipe();
 
