@@ -1,23 +1,35 @@
 .wrapper {
-  /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(29,29,29,1) 25%, rgba(61,60,60,1) 47%, rgba(29,29,29,1) 75%, rgba(0,0,0,1) 100%); */
-  background: radial-gradient(
-    97.8% 60.23% at 50% 50%,
-    #2f2f2d 8.29%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: #000000;
   height: 100vh;
   position: relative;
   animation: move 0.5s ease-out;
+  overflow: hidden;
 }
 
 .lines {
   background-size: 2px 2px;
   pointer-events: none;
-  background-image: repeating-linear-gradient(#000 4px, transparent 6px);
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 65, 0.03) 0px,
+    rgba(0, 255, 65, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
   height: 100%;
   width: 100%;
   position: absolute;
   z-index: 1;
+  animation: scanlineMove 8s linear infinite;
+}
+
+@keyframes scanlineMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
 }
 
 .container {
@@ -29,6 +41,8 @@
   position: relative;
   z-index: 0;
   font-size: 24px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
 }
 
 @keyframes move {

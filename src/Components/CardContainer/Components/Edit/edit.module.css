@@ -11,10 +11,22 @@
 .title,
 .type,
 .price {
-  border: none;
+  border: 1px solid var(--text-color);
   margin: 1px 0;
   font-weight: bold;
-  background: var(--text-color);
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--text-color);
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
+  outline: none;
+  padding: 5px;
+}
+
+.title:focus,
+.type:focus,
+.price:focus {
+  background: rgba(0, 255, 65, 0.1);
+  box-shadow: 0 0 10px var(--text-color), inset 0 0 10px rgba(0, 255, 65, 0.1);
 }
 
 .title {
@@ -35,15 +47,16 @@
 
 .button,
 .cancel {
-  background: var(--text-color);
+  background: rgba(0, 255, 65, 0.2);
   font-weight: bold;
   font-size: 12px;
-  color: black;
-  border: 1px solid black;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
   cursor: pointer;
 
   &:hover {
-    opacity: 0.6;
+    background: rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 10px var(--text-color);
   }
 }
 

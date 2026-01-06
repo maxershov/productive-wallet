@@ -1,12 +1,42 @@
 .button {
   color: var(--text-color);
-  background: none;
-  border: solid 1px var(--text-color);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--text-color);
   cursor: pointer;
-  padding: 0 15px;
+  padding: 6px 12px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 13px;
+  text-shadow: 0 0 6px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  min-width: fit-content;
+  box-shadow: 
+    0 0 4px rgba(0, 255, 65, 0.3),
+    inset 0 0 4px rgba(0, 255, 65, 0.05);
+  outline: none;
 
   &:hover {
-    opacity: 0.6;
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 
+      0 0 8px var(--text-color),
+      inset 0 0 8px rgba(0, 255, 65, 0.15);
+    border-color: var(--pip-boy-green);
+  }
+
+  &:active {
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: 
+      0 0 12px var(--text-color),
+      inset 0 0 12px rgba(0, 255, 65, 0.25);
+    transform: scale(0.98);
+  }
+
+  &:focus {
+    outline: 1px solid var(--text-color);
+    outline-offset: 2px;
   }
 }
 
@@ -16,8 +46,11 @@
   cursor: pointer;
   color: var(--text-color);
   font-size: 15px;
+  text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
+  transition: all 0.2s ease;
 
   &:hover {
-    opacity: 0.6;
+    opacity: 0.8;
+    text-shadow: 0 0 10px var(--pip-boy-green), 0 0 20px var(--pip-boy-green);
   }
 }
