@@ -1,7 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const ts = {
   test: /\.(ts)x?$/,
@@ -56,7 +55,6 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "main.js",
     chunkFilename: "[name].bundle.js",
-    clean: true,
   },
   devServer: {
     port: 6802,
@@ -88,7 +86,6 @@ module.exports = {
     rules: [ts, js, css, imgs, etc],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
       title: "Journal",
