@@ -16,7 +16,9 @@ const FetchData: React.FC = () => {
 
   return (
     <button type="button" className={global.iconBtn} onClick={fetchData}>
-      &#8681;
+      <span style={{ display: 'inline-block', transform: 'rotate(180deg)' }}>
+        &#8682;
+      </span>
     </button>
   );
 };
