@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const ts = {
   test: /\.(ts)x?$/,
@@ -86,6 +87,11 @@ module.exports = {
     rules: [ts, js, css, imgs, etc],
   },
   plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*'],
+      cleanStaleWebpackAssets: false, // Don't clean during hot reload
+      protectWebpackAssets: false, // Allow cleaning of webpack assets
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
       title: "Journal",
