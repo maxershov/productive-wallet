@@ -10,14 +10,18 @@ const Balance = () => {
   useEffect(() => {
     if (balance !== prevBalance) {
       const diff = balance - prevBalance;
-      const addTo = diff > 100 ? 10 : 1;
+      const maxSteps = 50; // Target max animation steps (~500ms at 10ms interval)
+      const addTo = Math.max(1, Math.ceil(Math.abs(diff) / maxSteps));
+      const direction = diff > 0 ? 1 : -1;
       let i = prevBalance;
       const interval = setInterval(() => {
-        i += addTo;
-        setDisplayedBalance(i);
-        if (i >= balance) {
+        i += addTo * direction;
+        if ((direction > 0 && i >= balance) || (direction < 0 && i <= balance)) {
+          setDisplayedBalance(balance);
           clearInterval(interval);
           setPrevBalance(balance);
+        } else {
+          setDisplayedBalance(i);
         }
       }, 10);
       return () => clearInterval(interval);
