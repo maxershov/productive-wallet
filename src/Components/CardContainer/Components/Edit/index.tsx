@@ -22,18 +22,15 @@ const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
     formRef.current.elements[focusInput].focus();
   }, [focusInput]);
 
-  function updateTask(e: React.ChangeEvent<HTMLFormElement>) {
+  const updateTask = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const target = e.target as HTMLFormElement;
-    const form = new FormData(target);
-
+    const form = new FormData(e.target as HTMLFormElement);
     const [title, type, price] = form.values() as Iterable<string>;
-    const editedTask = { title, type, price: parseInt(price, 10), ID, userId };
 
-    user.updateTask(editedTask);
+    user.updateTask({ title, type, price: parseInt(price, 10), ID, userId });
     updateTasks();
     onCloseEdit();
-  }
+  };
 
   return (
     <form

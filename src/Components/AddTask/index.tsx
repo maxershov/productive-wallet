@@ -7,10 +7,10 @@ import global from '@/global.module.css';
 const AddTask: React.FC = () => {
   const updateTasks = useContext(CardsActions);
 
-  function addTask() {
+  const addTask = () => {
     user.createTask();
     updateTasks();
-  }
+  };
 
   return (
     <button type="button" className={global.button} onClick={addTask}>

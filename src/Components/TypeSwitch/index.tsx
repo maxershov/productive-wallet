@@ -6,14 +6,10 @@ type PropsTypes = {
   toggleHabits: () => void;
 };
 
-const Tasks: React.FC<PropsTypes> = (props: PropsTypes) => {
-  const { showTasks, toggleHabits } = props;
+const TypeSwitch: React.FC<PropsTypes> = ({ showTasks, toggleHabits }) => (
+  <button type="button" className={global.button} onClick={toggleHabits}>
+    {showTasks ? 'HABITS' : 'TASKS'}
+  </button>
+);
 
-  return (
-    <button type="button" className={global.button} onClick={toggleHabits}>
-      {showTasks ? 'HABITS' : 'TASKS'}
-    </button>
-  );
-};
-
-export default Tasks;
+export default TypeSwitch;

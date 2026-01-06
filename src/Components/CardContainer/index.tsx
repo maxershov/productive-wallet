@@ -29,12 +29,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
   };
 
   const onComplete = (ID: number) => {
-    if (type === TASK_TYPE.HABIT) {
-      user.completeHabit(ID);
-    } else {
-      user.completeTask(ID);
-    }
-
+    type === TASK_TYPE.HABIT ? user.completeHabit(ID) : user.completeTask(ID);
     updateTasks();
   };
 

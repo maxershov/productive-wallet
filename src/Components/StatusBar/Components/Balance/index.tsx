@@ -20,9 +20,8 @@ const Balance = () => {
           setPrevBalance(balance);
         }
       }, 10);
+      return () => clearInterval(interval);
     }
-
-    // fix init render
     setDisplayedBalance(balance);
   }, [balance, prevBalance]);
 

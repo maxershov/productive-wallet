@@ -18,7 +18,7 @@ const Time: React.FC = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [today]);
+  }, []);
 
   return <div className={styles.time}>{date}</div>;
 };

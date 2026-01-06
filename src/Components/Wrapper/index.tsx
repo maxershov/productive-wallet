@@ -48,9 +48,7 @@ const Wrapper: React.FC = () => {
     setBalance(user.balance.amount);
   }, []);
 
-  const updateBalance = useCallback(() => {
-    setBalance(user.balance.amount);
-  }, []);
+  const updateBalance = useCallback(() => setBalance(user.balance.amount), []);
 
   return (
     <div className={styles.wrapper}>

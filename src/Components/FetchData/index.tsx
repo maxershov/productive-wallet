@@ -9,10 +9,10 @@ import global from '@/global.module.css';
 const FetchData: React.FC = () => {
   const updateTasks = useContext(CardsActions);
 
-  async function fetchData() {
+  const fetchData = async () => {
     await user.fetchData();
     updateTasks();
-  }
+  };
 
   return (
     <button type="button" className={global.iconBtn} onClick={fetchData}>
