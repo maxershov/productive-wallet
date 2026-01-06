@@ -1,23 +1,26 @@
-import { user } from './User';
-
 export class Balance {
-  amount: number;
+  private _amount: number;
+  private onBalanceChange?: (newAmount: number) => void;
 
-  constructor(amount: number) {
-    this.amount = amount || 0;
+  constructor(amount: number = 0, onBalanceChange?: (newAmount: number) => void) {
+    this._amount = amount;
+    this.onBalanceChange = onBalanceChange;
   }
 
-  getAmount(): number {
-    return this.amount;
+  get amount(): number {
+    return this._amount;
+  }
+
+  set amount(value: number) {
+    this._amount = value;
+    this.onBalanceChange?.(this._amount);
   }
 
   add(value: number): void {
     this.amount += value;
-    user.data.user.balance = this.amount;
   }
 
   withdraw(value: number): void {
     this.amount -= value;
-    user.data.user.balance = this.amount;
   }
 }

@@ -39,17 +39,17 @@ const Wrapper: React.FC = () => {
     (async () => {
       const data = await user.getData();
       setTasks(data.tasks);
-      setBalance(user.balance.getAmount());
+      setBalance(user.balance.amount);
     })();
   }, []);
 
   const updateTasks = useCallback(() => {
     setTasks([...user.tasks]);
-    setBalance(user.balance.getAmount());
+    setBalance(user.balance.amount);
   }, []);
 
   const updateBalance = useCallback(() => {
-    setBalance(user.balance.getAmount());
+    setBalance(user.balance.amount);
   }, []);
 
   return (

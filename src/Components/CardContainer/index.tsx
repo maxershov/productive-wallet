@@ -14,9 +14,6 @@ import styles from './card_container.module.css';
 const CardContainer: React.FC<Task> = (props: Task) => {
   const { ID, title, type, price, date, userId } = props;
 
-  // eslint-disable-next-line no-console
-  console.log(`card rendered ${ID}`);
-
   const updateTasks = useContext(CardsActions);
 
   const [isEdit, setIsEdit] = useState(false);

@@ -4,7 +4,7 @@ import {
   User as UserType,
   Data as DataType,
 } from '../../types';
-import { getLocalData } from '@/BFF/getLocalData';
+import { getLocalData, getDefaultData } from '@/BFF/getLocalData';
 import { fetchDataFromDb } from '@/BFF/fetchDataFromDb';
 import { saveLocalData } from '@/BFF/saveLocalData';
 import { syncDataToDb } from '@/BFF/syncDataToDb';
@@ -21,8 +21,15 @@ export class User {
   ID: number;
 
   constructor() {
-    this.tasks = [];
-    this.balance = new Balance(0);
+    this.data = getDefaultData();
+    this.tasks = this.data.tasks;
+    this.initializeBalance();
+  }
+
+  private initializeBalance(): void {
+    this.balance = new Balance(this.data.user.balance, (newAmount) => {
+      this.data.user.balance = newAmount;
+    });
   }
 
   async getData(): Promise<{
@@ -31,7 +38,7 @@ export class User {
   }> {
     this.data = getLocalData();
     this.tasks = this.data.tasks;
-    this.balance = new Balance(this.data.user.balance);
+    this.initializeBalance();
     this.name = this.data.user.name;
     return this.data;
   }
@@ -39,7 +46,7 @@ export class User {
   async fetchData(): Promise<void> {
     this.data = await fetchDataFromDb();
     this.tasks = this.data.tasks;
-    this.balance = new Balance(this.data.user.balance);
+    this.initializeBalance();
     this.name = this.data.user.name;
     saveLocalData(this.data);
   }
@@ -49,7 +56,10 @@ export class User {
     syncDataToDb(dataString);
   }
 
-  getID() {
+  getID(): number {
+    if (this.tasks.length === 0) {
+      return 1;
+    }
     const IDs = this.tasks.map((task) => task.ID);
     return Math.max(...IDs) + 1;
   }
@@ -65,7 +75,7 @@ export class User {
     this.tasks.push(newTask);
   }
 
-  getTaskByID(id: number): TaskType {
+  getTaskByID(id: number): TaskType | undefined {
     return this.tasks.find((task) => task.ID === id);
   }
 
@@ -81,12 +91,15 @@ export class User {
   updateTask(task: TaskType): void {
     const taskIndex = this.getTaskIndexByID(task.ID);
     this.tasks[taskIndex] = task;
-
+    this.data.tasks = this.tasks;
     saveLocalData(this.data);
   }
 
   completeTask(ID: number): void {
     const taskToComplete = this.getTaskByID(ID);
+    if (!taskToComplete) {
+      throw new Error(`Task with ID ${ID} not found`);
+    }
     const addToBalance = taskToComplete.price;
 
     this.deleteTaskByID(ID);
@@ -97,6 +110,9 @@ export class User {
 
   completeHabit(ID: number): void {
     const taskToComplete = this.getTaskByID(ID);
+    if (!taskToComplete) {
+      throw new Error(`Task with ID ${ID} not found`);
+    }
     const addToBalance = taskToComplete.price;
 
     this.balance.add(addToBalance);
