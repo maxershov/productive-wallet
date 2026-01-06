@@ -50,22 +50,29 @@ const etc = {
 module.exports = {
   context: path.resolve(__dirname),
   mode: "development",
-  entry: ["@babel/polyfill", "./src/index.jsx"],
+  entry: ["core-js/stable", "./src/index.jsx"],
   devtool: "source-map",
   output: {
     path: path.join(__dirname, "dist"),
     filename: "main.js",
     chunkFilename: "[name].bundle.js",
+    clean: true,
   },
   devServer: {
     port: 6802,
     open: true,
     hot: true,
-    watchContentBase: true,
-    progress: true,
-    contentBase: path.join(__dirname, "dist"),
-    writeToDisk: true,
-    overlay: true,
+    client: {
+      overlay: true,
+      progress: true,
+    },
+    static: {
+      directory: path.join(__dirname, "dist"),
+      watch: true,
+    },
+    devMiddleware: {
+      writeToDisk: true,
+    },
     historyApiFallback: true, // on 404 load publicPath => for BrowserRouter on refresh
   },
   resolve: {
