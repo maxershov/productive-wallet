@@ -2,7 +2,7 @@ import React from 'preact/compat';
 import { Task } from 'types';
 import styles from './card.module.css';
 import { dateWrapper } from '@/Utils/DateWrapper';
-import { FOCUS, FocusValues } from '@/enums';
+import { FOCUS, FocusValues, TASK_TYPE } from '@/enums';
 
 type PropsTypes = Task & {
   onEdit: (focus: FocusValues) => void;
@@ -25,13 +25,15 @@ const Card: React.FC<PropsTypes> = (props: PropsTypes) => {
       >
         <span>{title}</span>
       </button>
-      <button
-        className={styles.type}
-        type="button"
-        onClick={() => onEdit(FOCUS.TYPE)}
-      >
-        <span>{type}</span>
-      </button>
+      {type !== TASK_TYPE.HABIT && (
+        <button
+          className={styles.type}
+          type="button"
+          onClick={() => onEdit(FOCUS.TYPE)}
+        >
+          <span>{type}</span>
+        </button>
+      )}
       <button
         className={styles.price}
         type="button"
