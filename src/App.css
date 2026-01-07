@@ -21,7 +21,7 @@ body {
   position: relative;
 }
 
-/* Scanline effect overlay */
+/* Enhanced scanline effect overlay */
 body::before {
   content: '';
   position: fixed;
@@ -31,8 +31,8 @@ body::before {
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 1px,
     transparent 1px,
     transparent 2px
   );
@@ -41,7 +41,7 @@ body::before {
   animation: scanline 8s linear infinite;
 }
 
-/* Flicker effect */
+/* Enhanced flicker effect for old screen */
 body::after {
   content: '';
   position: fixed;
@@ -52,7 +52,10 @@ body::after {
   background: transparent;
   pointer-events: none;
   z-index: 10000;
-  animation: flicker 0.15s infinite;
+  animation: flicker 0.12s infinite;
+  box-shadow: 
+    inset 0 0 200px rgba(0, 255, 65, 0.03),
+    inset 0 0 400px rgba(0, 255, 65, 0.01);
 }
 
 @keyframes scanline {
@@ -68,8 +71,14 @@ body::after {
   0%, 100% {
     opacity: 1;
   }
+  25% {
+    opacity: 0.98;
+  }
   50% {
     opacity: 0.99;
+  }
+  75% {
+    opacity: 0.97;
   }
 }
 
