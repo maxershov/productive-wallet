@@ -1,18 +1,20 @@
 .edit {
   display: grid;
-  grid-template-rows: auto;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto;
+  gap: 4px 12px;
   grid-template-areas:
-    'title title title'
-    'type type cancel'
-    'price price button';
-  align-items: start;
+    'title title'
+    'type cancel'
+    'price button';
+  align-items: center;
 }
 
 .title,
 .type,
 .price {
   border: 1px solid var(--text-color);
-  margin: 1px 0;
+  margin: 0;
   font-weight: bold;
   background: rgba(0, 0, 0, 0.5);
   color: var(--text-color);
@@ -20,6 +22,7 @@
   text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
   outline: none;
   padding: 5px;
+  height: fit-content;
 }
 
 .title:focus,
@@ -32,6 +35,7 @@
 .title {
   font-size: 14px;
   grid-area: title;
+  grid-column: 1 / -1;
 }
 
 .type {
@@ -53,6 +57,15 @@
   color: var(--text-color);
   border: 1px solid var(--text-color);
   cursor: pointer;
+  padding: 5px 16px;
+  min-width: 80px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
+  transition: all 0.2s ease;
+  height: fit-content;
+  box-sizing: border-box;
 
   &:hover {
     background: rgba(0, 255, 65, 0.4);

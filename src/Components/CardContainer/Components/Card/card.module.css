@@ -8,6 +8,10 @@
     'title title title'
     'type type .'
     'price date .';
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .title,
@@ -56,7 +60,7 @@
   border-radius: 2px;
   margin: 2px 0;
   position: absolute;
-  right: -20px;
+  right: 0;
   top: 15px;
   font-family: 'Share Tech Mono', 'Courier New', monospace;
   text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
