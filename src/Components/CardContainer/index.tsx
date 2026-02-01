@@ -1,7 +1,5 @@
-import React, { useState, useContext } from 'preact/compat';
+import React, { useState } from 'preact/compat';
 import { Task } from 'types';
-
-import { CardsActions } from '@/Context';
 
 import { user } from '@/Classes/User';
 import { FocusValues, TASK_TYPE } from '@/enums';
@@ -11,10 +9,12 @@ import Edit from './Components/Edit';
 
 import styles from './card_container.module.css';
 
-const CardContainer: React.FC<Task> = (props: Task) => {
-  const { ID, title, type, price, date, userId } = props;
+type CardContainerProps = Task & {
+  onRefresh: () => void;
+};
 
-  const updateTasks = useContext(CardsActions);
+const CardContainer: React.FC<CardContainerProps> = (props: CardContainerProps) => {
+  const { ID, title, type, price, date, userId, onRefresh } = props;
 
   const [isEdit, setIsEdit] = useState(false);
   const [focus, setFocus] = useState(null);
@@ -30,7 +30,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
 
   const onComplete = (ID: number) => {
     type === TASK_TYPE.HABIT ? user.completeHabit(ID) : user.completeTask(ID);
-    updateTasks();
+    onRefresh();
   };
 
   return (
@@ -45,6 +45,7 @@ const CardContainer: React.FC<Task> = (props: Task) => {
           price={price}
           onCloseEdit={onCloseEdit}
           focusInput={focus}
+          onUpdate={onRefresh}
         />
       ) : (
         <Card

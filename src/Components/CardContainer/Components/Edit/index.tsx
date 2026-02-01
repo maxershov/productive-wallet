@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useRef } from 'preact/compat';
+import React, { useEffect, useRef } from 'preact/compat';
 import { Task as TaskType } from '../../../../../types';
 import { user } from '@/Classes/User';
-
-import { CardsActions } from '@/Context';
 
 import styles from './edit.module.css';
 
@@ -11,11 +9,11 @@ import { FocusValues } from '@/enums';
 type PropsTypes = TaskType & {
   onCloseEdit: () => void;
   focusInput: FocusValues;
+  onUpdate: () => void;
 };
 
 const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
   const { userId, ID, title, type, price, onCloseEdit, focusInput } = props;
-  const updateTasks = useContext(CardsActions);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -28,7 +26,7 @@ const Edit: React.FC<PropsTypes> = (props: PropsTypes) => {
     const [title, type, price] = form.values() as Iterable<string>;
 
     user.updateTask({ title, type, price: parseInt(price, 10), ID, userId });
-    updateTasks();
+    onUpdate();
     onCloseEdit();
   };
 

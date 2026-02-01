@@ -1,22 +1,13 @@
-import React, { useContext } from 'preact/compat';
-import { CardsActions } from '@/Context';
-import { user } from '@/Classes/User';
-
+import React from 'preact/compat';
 import global from '@/global.module.css';
 
-const AddTask: React.FC = () => {
-  const updateTasks = useContext(CardsActions);
-
-  const addTask = () => {
-    user.createTask();
-    updateTasks();
-  };
-
-  return (
-    <button type="button" className={global.button} onClick={addTask}>
-      +
-    </button>
-  );
+type Props = {
+  onAdd: () => void;
 };
 
+const AddTask: React.FC<Props> = ({ onAdd }) => (
+  <button type="button" className={global.button} onClick={onAdd}>
+    +
+  </button>
+);
 export default AddTask;
