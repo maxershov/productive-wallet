@@ -7,14 +7,6 @@ import WithToken from '../../HOC/WithToken';
 import Tasks from '../Tasks';
 import TypeSwitch from '../TypeSwitch';
 import StatusBar from '../StatusBar';
-
-import {
-  CardsContext,
-  CardsActions,
-  BalanceContext,
-  BalanceActions,
-} from '@/Context';
-
 import AddTask from '../AddTask';
 
 import { useSwipe } from '@/Hooks/useSwipe';
@@ -39,41 +31,43 @@ const Wrapper: React.FC = () => {
     (async () => {
       const data = await user.getData();
       setTasks(data.tasks);
-      setBalance(user.balance.getAmount());
+      setBalance(user.balance.amount);
     })();
   }, []);
 
-  const updateTasks = useCallback(() => {
+  const refreshTasks = useCallback(() => {
     setTasks([...user.tasks]);
-    setBalance(user.balance.getAmount());
+    setBalance(user.balance.amount);
   }, []);
 
-  const updateBalance = useCallback(() => {
-    setBalance(user.balance.getAmount());
-  }, []);
+  const handleFetchData = useCallback(async () => {
+    await user.fetchData();
+    refreshTasks();
+  }, [refreshTasks]);
+
+  const handleAddTask = useCallback(() => {
+    user.createTask();
+    refreshTasks();
+  }, [refreshTasks]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.lines} />
       <div className={styles.container}>
-        <BalanceContext.Provider value={balance}>
-          <BalanceActions.Provider value={updateBalance}>
-            <CardsContext.Provider value={tasks}>
-              <CardsActions.Provider value={updateTasks}>
-                <StatusBar />
-                <h3 className={styles.title}>JOURNAL</h3>
-                <WithToken>
-                  <Tasks showTasks={showTasks} />
-                  <AddTask />
-                  <TypeSwitch
-                    showTasks={showTasks}
-                    toggleHabits={toggleHabits}
-                  />
-                </WithToken>
-              </CardsActions.Provider>
-            </CardsContext.Provider>
-          </BalanceActions.Provider>
-        </BalanceContext.Provider>
+        <StatusBar balance={balance} onFetch={handleFetchData} />
+        <h3 className={styles.title}>JOURNAL</h3>
+        <WithToken>
+          <Tasks
+            showTasks={showTasks}
+            tasks={tasks}
+            onRefresh={refreshTasks}
+          />
+          <AddTask onAdd={handleAddTask} />
+          <TypeSwitch
+            showTasks={showTasks}
+            toggleHabits={toggleHabits}
+          />
+        </WithToken>
       </div>
     </div>
   );

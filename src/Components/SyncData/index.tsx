@@ -4,9 +4,9 @@ import { user } from '@/Classes/User';
 import global from '@/global.module.css';
 
 const SyncData: React.FC = () => {
-  function syncData() {
+  const syncData = () => {
     user.syncData();
-  }
+  };
 
   return (
     <button type="button" className={global.iconBtn} onClick={syncData}>

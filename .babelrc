@@ -3,7 +3,9 @@
         [
             "@babel/preset-env",
             {
-                "loose": true
+                "loose": true,
+                "useBuiltIns": "entry",
+                "corejs": 3
             }
         ],
         "@babel/preset-react",
@@ -15,7 +17,9 @@
                 [
                     "@babel/preset-env",
                     {
-                        "loose": true
+                        "loose": true,
+                        "useBuiltIns": "entry",
+                        "corejs": 3
                     }
                 ],
                 "@babel/preset-typescript"

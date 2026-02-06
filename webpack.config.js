@@ -1,8 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
@@ -52,11 +53,12 @@ const etc = {
 
 module.exports = {
   context: path.resolve(__dirname),
-  entry: ["@babel/polyfill", "./src/index.jsx"],
+  entry: ["core-js/stable", "./src/index.jsx"],
   mode: "production",
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].[contenthash].bundle.js",
+    clean: true,
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
@@ -69,6 +71,26 @@ module.exports = {
   },
   module: {
     rules: [ts, js, css, imgs, etc],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            unsafe: true,
+            inline: true,
+            passes: 2,
+            keep_fargs: false,
+          },
+          format: {
+            beautify: false,
+          },
+        },
+        parallel: true,
+      }),
+      new CssMinimizerPlugin(),
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -88,20 +110,6 @@ module.exports = {
     }),
     new CompressionPlugin({
       algorithm: "gzip",
-    }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          unsafe: true,
-          inline: true,
-          passes: 2,
-          keep_fargs: false,
-        },
-        output: {
-          beautify: false,
-        },
-      },
-      parallel: true,
     }),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
   ],

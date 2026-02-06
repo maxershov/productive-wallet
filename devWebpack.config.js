@@ -50,7 +50,7 @@ const etc = {
 module.exports = {
   context: path.resolve(__dirname),
   mode: "development",
-  entry: ["@babel/polyfill", "./src/index.jsx"],
+  entry: ["core-js/stable", "./src/index.jsx"],
   devtool: "source-map",
   output: {
     path: path.join(__dirname, "dist"),
@@ -61,11 +61,17 @@ module.exports = {
     port: 6802,
     open: true,
     hot: true,
-    watchContentBase: true,
-    progress: true,
-    contentBase: path.join(__dirname, "dist"),
-    writeToDisk: true,
-    overlay: true,
+    client: {
+      overlay: true,
+      progress: true,
+    },
+    static: {
+      directory: path.join(__dirname, "dist"),
+      watch: true,
+    },
+    devMiddleware: {
+      writeToDisk: true,
+    },
     historyApiFallback: true, // on 404 load publicPath => for BrowserRouter on refresh
   },
   resolve: {
@@ -81,7 +87,11 @@ module.exports = {
     rules: [ts, js, css, imgs, etc],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*'],
+      cleanStaleWebpackAssets: false, // Don't clean during hot reload
+      protectWebpackAssets: false, // Allow cleaning of webpack assets
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
       title: "Journal",

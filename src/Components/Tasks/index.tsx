@@ -1,37 +1,23 @@
-import React, { useContext } from 'preact/compat';
+import React from 'preact/compat';
+import { Task } from 'types';
 
 import CardContainer from '../CardContainer';
-
-import { CardsContext } from '@/Context';
 
 import { filterTasks } from '@/Utils/FilterTasks';
 
 type PropsTypes = {
   showTasks: boolean;
+  tasks?: Task[];
+  onRefresh: () => void;
 };
 
-const Tasks: React.FC<PropsTypes> = (props: PropsTypes) => {
-  const { showTasks } = props;
-  const tasks = useContext(CardsContext);
-  return (
-    <div>
-      {tasks &&
-        filterTasks(tasks, showTasks).map((task) => {
-          const { ID, userId, title, type, price, date } = task;
-          return (
-            <CardContainer
-              key={ID}
-              ID={ID}
-              title={title}
-              type={type}
-              price={price}
-              date={date}
-              userId={userId}
-            />
-          );
-        })}
-    </div>
-  );
-};
+const Tasks: React.FC<PropsTypes> = ({ showTasks, tasks, onRefresh }) => (
+  <div>
+    {tasks &&
+      filterTasks(tasks, showTasks).map((task) => (
+        <CardContainer key={task.ID} {...task} onRefresh={onRefresh} />
+      ))}
+  </div>
+);
 
 export default Tasks;

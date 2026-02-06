@@ -1,27 +1,128 @@
 .wrapper {
-  /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(29,29,29,1) 25%, rgba(61,60,60,1) 47%, rgba(29,29,29,1) 75%, rgba(0,0,0,1) 100%); */
-  background: radial-gradient(
-    97.8% 60.23% at 50% 50%,
-    #2f2f2d 8.29%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: #000000;
   height: 100vh;
   position: relative;
   animation: move 0.5s ease-out;
+  overflow: hidden;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  /* CRT screen curvature and distortion */
+  filter: contrast(1.1) brightness(0.95);
+  transform: perspective(1000px) rotateX(1deg);
+  transform-style: preserve-3d;
+}
+
+/* Green gradient overlay in center */
+.wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 65, 0.15) 0%,
+    rgba(0, 255, 65, 0.08) 30%,
+    rgba(0, 255, 65, 0.03) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
 }
 
 .lines {
   background-size: 2px 2px;
   pointer-events: none;
-  background-image: repeating-linear-gradient(#000 4px, transparent 6px);
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 65, 0.08) 0px,
+    rgba(0, 255, 65, 0.08) 1px,
+    transparent 1px,
+    transparent 2px
+  );
   height: 100%;
   width: 100%;
   position: absolute;
   z-index: 1;
+  animation: scanlineMove 0.08s linear infinite;
+  opacity: 0.6;
+}
+
+/* Old screen noise/grain effect - enhanced */
+.wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.02) 2px,
+      rgba(0, 255, 65, 0.02) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.02) 2px,
+      rgba(0, 255, 65, 0.02) 4px
+    );
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.4;
+  animation: noise 0.08s infinite, staticFlicker 0.3s infinite;
+}
+
+@keyframes noise {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(0, 0);
+  }
+  25% {
+    opacity: 0.45;
+    transform: translate(1px, 1px);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translate(-1px, 1px);
+  }
+  75% {
+    opacity: 0.42;
+    transform: translate(1px, -1px);
+  }
+}
+
+@keyframes staticFlicker {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.02);
+  }
+}
+
+@keyframes scanlineMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
 }
 
 .container {
   padding: 10px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .title {
@@ -29,6 +130,8 @@
   position: relative;
   z-index: 0;
   font-size: 24px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
 }
 
 @keyframes move {

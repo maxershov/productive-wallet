@@ -1,10 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 :root {
   box-sizing: border-box;
-  --text-color: #1bff80;
+  --text-color: #00ff41;
+  --pip-boy-green: #00ff41;
+  --pip-boy-dark-green: #00cc33;
+  --scanline-color: rgba(0, 255, 65, 0.03);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
   margin: 0;
-  font-family: Georgia, serif;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
   background: #000000;
+  color: var(--text-color);
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  /* CRT Screen Curvature Effect - subtle */
+  filter: contrast(1.05) brightness(0.98);
+}
+
+/* Main scanline effect overlay - moving horizontal lines */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline 0.1s linear infinite;
+  opacity: 0.5;
+}
+
+/* Screen refresh flash and flicker effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+  z-index: 10000;
+  animation: screenRefresh 0.08s linear infinite, flicker 0.15s infinite;
+  box-shadow: 
+    inset 0 0 200px rgba(0, 255, 65, 0.03),
+    inset 0 0 400px rgba(0, 255, 65, 0.01);
+}
+
+/* Vignette effect - darker edges like old CRT */
+#root {
+  position: relative;
+}
+
+#root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Screen phosphor glow effect */
+#root::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(0, 255, 65, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(0, 255, 65, 0.05) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 9997;
+  animation: phosphorGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes screenRefresh {
+  0% {
+    opacity: 1;
+    background: transparent;
+    box-shadow: 
+      inset 0 0 200px rgba(0, 255, 65, 0.03),
+      inset 0 0 400px rgba(0, 255, 65, 0.01);
+  }
+  2% {
+    opacity: 0.95;
+    background: rgba(0, 255, 65, 0.02);
+    box-shadow: 
+      inset 0 0 200px rgba(0, 255, 65, 0.05),
+      inset 0 0 400px rgba(0, 255, 65, 0.02);
+  }
+  4% {
+    opacity: 1;
+    background: transparent;
+    box-shadow: 
+      inset 0 0 200px rgba(0, 255, 65, 0.03),
+      inset 0 0 400px rgba(0, 255, 65, 0.01);
+  }
+  100% {
+    opacity: 1;
+    background: transparent;
+    box-shadow: 
+      inset 0 0 200px rgba(0, 255, 65, 0.03),
+      inset 0 0 400px rgba(0, 255, 65, 0.01);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.98;
+  }
+  50% {
+    opacity: 0.99;
+  }
+  75% {
+    opacity: 0.97;
+  }
+}
+
+@keyframes phosphorGlow {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+/* Text glow effect - applied selectively to text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, label, button, input, textarea {
+  text-shadow: 0 0 5px var(--pip-boy-green), 0 0 10px var(--pip-boy-green);
+  /* Subtle text persistence effect */
+  animation: textPersistence 0.1s ease-out;
+}
+
+@keyframes textPersistence {
+  0% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 1;
+  }
 }
